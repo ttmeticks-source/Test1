@@ -458,14 +458,14 @@ local script = G2L["7"];
 	G2L["1"]["Name"] = [[BlairGui]];
 	G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 	
-	-- 2. Main Windows: Home (Blair) and Scripts (Blair1)
+	-- 2. Main Windows: Home (Blair1) and Scripts (Blair2)
 	G2L["2"] = Instance.new("ImageLabel", G2L["1"]);
 	G2L["2"]["BorderSizePixel"] = 0;
 	G2L["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 	G2L["2"]["Image"] = [[rbxassetid://129002638586770]];
 	G2L["2"]["Size"] = UDim2.new(0, 629, 0, 318);
 	G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-	G2L["2"]["Name"] = [[Blair]];
+	G2L["2"]["Name"] = [[Blair1]]; -- Updated name
 	G2L["2"]["Position"] = UDim2.new(0.13514, 0, 0.12407, 0);
 	
 	G2L["1a"] = Instance.new("ImageLabel", G2L["1"]);
@@ -475,10 +475,10 @@ local script = G2L["7"];
 	G2L["1a"]["Size"] = UDim2.new(0, 629, 0, 318);
 	G2L["1a"]["Visible"] = false;
 	G2L["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-	G2L["1a"]["Name"] = [[Blair1]];
+	G2L["1a"]["Name"] = [[Blair2]]; -- Updated name
 	G2L["1a"]["Position"] = UDim2.new(0.13514, 0, 0.12407, 0);
 	
-	-- 3. Core Interaction Elements inside Blair (Home Page)
+	-- 3. Core Interaction Elements inside Blair1 (Home Page)
 	G2L["3"] = Instance.new("TextLabel", G2L["2"]);
 	G2L["3"]["TextWrapped"] = true;
 	G2L["3"]["Size"] = UDim2.new(0, 615, 0, 27);
@@ -487,7 +487,7 @@ local script = G2L["7"];
 	G2L["3"]["BackgroundTransparency"] = 1;
 	G2L["3"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]]);
 	
-	-- Code execution input box
+	-- Code execution input box inside Blair1
 	G2L["4"] = Instance.new("TextBox", G2L["2"]);
 	G2L["4"]["BorderSizePixel"] = 0;
 	G2L["4"]["TextWrapped"] = true;
@@ -502,7 +502,7 @@ local script = G2L["7"];
 	G2L["4"]["Text"] = [[]];
 	G2L["4"]["BackgroundTransparency"] = 0.76;
 	
-	-- Scan Action Button
+	-- Scan Action Button inside Blair1
 	G2L["5"] = Instance.new("TextButton", G2L["2"]);
 	G2L["5"]["Size"] = UDim2.new(0, 139, 0, 27);
 	G2L["5"]["Position"] = UDim2.new(0.73275, 0, 0.87736, 0);
@@ -513,7 +513,7 @@ local script = G2L["7"];
 	G2L["5"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]]);
 	Instance.new("UICorner", G2L["5"]);
 	
-	-- Clear Input Box Button
+	-- Clear Input Box Button inside Blair1
 	G2L["8"] = Instance.new("TextButton", G2L["2"]);
 	G2L["8"]["Size"] = UDim2.new(0, 139, 0, 27);
 	G2L["8"]["Position"] = UDim2.new(0.46778, 0, 0.87736, 0);
@@ -524,7 +524,7 @@ local script = G2L["7"];
 	G2L["8"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]]);
 	Instance.new("UICorner", G2L["8"]);
 	
-	-- Execute Code Button
+	-- Execute Code Button inside Blair1
 	G2L["b"] = Instance.new("TextButton", G2L["2"]);
 	G2L["b"]["Size"] = UDim2.new(0, 131, 0, 27);
 	G2L["b"]["Position"] = UDim2.new(0.20273, 0, 0.87736, 0);
@@ -592,19 +592,18 @@ local script = G2L["7"];
 		local executeButton = G2L["b"]
 		local codeTextBox = G2L["4"]
 	
-		local blairHome = G2L["2"]
-		local blairScripts = G2L["1a"]
+		local blair1 = G2L["2"]
+		local blair2 = G2L["1a"]
 		local masterToggleButton = G2L["17"]
 		local closeHome = G2L["d"]
 		local closeScripts = G2L["1c"]
 		local toScripts = G2L["11"]
 		local toHome = G2L["1d"]
 	
-		-- Function to safely handle multi-platform code string compilation
+		-- Function to safely compile code string execution
 		local function runStringCode(sourceCode)
 			if sourceCode == "" then return end
 	
-			-- Use the modern native task framework to run compiled code
 			local compiledFunction, compilationError = loadstring(sourceCode)
 			if compiledFunction then
 				task.spawn(compiledFunction)
@@ -644,14 +643,14 @@ local script = G2L["7"];
 				StarterGui:SetCore("SendNotification", {
 					Title = "Scan Status",
 					Text = "Backdoor Found!",
-					Icon = "rbxassetid://10611414436", -- Warning visual asset
+					Icon = "rbxassetid://10611414436", -- Warning asset
 					Duration = 4
 				})
 			else
 				StarterGui:SetCore("SendNotification", {
 					Title = "Scan Status",
 					Text = "Backdoor not found!",
-					Icon = "rbxassetid://10611412030", -- Checkmark visual asset
+					Icon = "rbxassetid://10611412030", -- Checkmark asset
 					Duration = 4
 				})
 			end
@@ -670,30 +669,30 @@ local script = G2L["7"];
 	
 		-- Navigation interface routines
 		toScripts.MouseButton1Click:Connect(function()
-			blairHome.Visible = false
-			blairScripts.Visible = true
+			blair1.Visible = false
+			blair2.Visible = true
 		end)
 	
 		toHome.MouseButton1Click:Connect(function()
-			blairScripts.Visible = false
-			blairHome.Visible = true
+			blair2.Visible = false
+			blair1.Visible = true
 		end)
 	
 		masterToggleButton.MouseButton1Click:Connect(function()
-			if not blairHome.Visible and not blairScripts.Visible then
-				blairHome.Visible = true
+			if not blair1.Visible and not blair2.Visible then
+				blair1.Visible = true
 			else
-				blairHome.Visible = false
-				blairScripts.Visible = false
+				blair1.Visible = false
+				blair2.Visible = false
 			end
 		end)
 	
 		closeHome.MouseButton1Click:Connect(function()
-			blairHome.Visible = false
+			blair1.Visible = false
 		end)
 	
 		closeScripts.MouseButton1Click:Connect(function()
-			blairScripts.Visible = false
+			blair2.Visible = false
 		end)
 	end
 	
