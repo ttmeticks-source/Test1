@@ -450,236 +450,256 @@ G2L["2b"] = Instance.new("UICorner", G2L["2a"]);
 -- StarterGui.BlairGui.Blair.ScanButton.ScanScript
 local function C_7()
 local script = G2L["7"];
-	-- Fe Bypass - Private Bypass
-	-- Place this LocalScript inside BlairGui > Blair > ScanButton
+	-- Standalone UI Framework & Backdoor Scanner Logic
+	local G2L = {};
 	
-	local scanButton = script.Parent
-	local screenGui = scanButton:FindFirstAncestorOfClass("ScreenGui")
+	-- 1. Create the Main ScreenGui container targeting StarterGui/PlayerGui
+	G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+	G2L["1"]["Name"] = [[BlairGui]];
+	G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 	
-	if not screenGui then
-		warn("BlairGui ScreenGui was not found.")
-		return
-	end
+	-- 2. Main Windows: Home (Blair) and Scripts (Blair1)
+	G2L["2"] = Instance.new("ImageLabel", G2L["1"]);
+	G2L["2"]["BorderSizePixel"] = 0;
+	G2L["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["2"]["Image"] = [[rbxassetid://129002638586770]];
+	G2L["2"]["Size"] = UDim2.new(0, 629, 0, 318);
+	G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["2"]["Name"] = [[Blair]];
+	G2L["2"]["Position"] = UDim2.new(0.13514, 0, 0.12407, 0);
 	
-	local blair = screenGui:FindFirstChild("Blair", true)
-	if not blair then
-		warn("ImageLabel named Blair was not found.")
-		return
-	end
+	G2L["1a"] = Instance.new("ImageLabel", G2L["1"]);
+	G2L["1a"]["BorderSizePixel"] = 0;
+	G2L["1a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["1a"]["Image"] = [[rbxassetid://129002638586770]];
+	G2L["1a"]["Size"] = UDim2.new(0, 629, 0, 318);
+	G2L["1a"]["Visible"] = false;
+	G2L["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+	G2L["1a"]["Name"] = [[Blair1]];
+	G2L["1a"]["Position"] = UDim2.new(0.13514, 0, 0.12407, 0);
 	
-	local executeButton =
-		blair:FindFirstChild("ExecuteButton", true)
-		or blair:FindFirstChild("Execute", true)
+	-- 3. Core Interaction Elements inside Blair (Home Page)
+	G2L["3"] = Instance.new("TextLabel", G2L["2"]);
+	G2L["3"]["TextWrapped"] = true;
+	G2L["3"]["Size"] = UDim2.new(0, 615, 0, 27);
+	G2L["3"]["Text"] = [[Blair Backdoor - Private Framework]];
+	G2L["3"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["3"]["BackgroundTransparency"] = 1;
+	G2L["3"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]]);
 	
-	local textBox = blair:FindFirstChild("TextBox", true)
+	-- Code execution input box
+	G2L["4"] = Instance.new("TextBox", G2L["2"]);
+	G2L["4"]["BorderSizePixel"] = 0;
+	G2L["4"]["TextWrapped"] = true;
+	G2L["4"]["TextSize"] = 14;
+	G2L["4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["4"]["BackgroundColor3"] = Color3.fromRGB(115, 116, 118);
+	G2L["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]]);
+	G2L["4"]["MultiLine"] = true;
+	G2L["4"]["ClearTextOnFocus"] = false;
+	G2L["4"]["Size"] = UDim2.new(0, 472, 0, 219);
+	G2L["4"]["Position"] = UDim2.new(0.20432, 0, 0.15723, 0);
+	G2L["4"]["Text"] = [[]];
+	G2L["4"]["BackgroundTransparency"] = 0.76;
 	
-	if not textBox or not textBox:IsA("TextBox") then
-		warn("TextBox was not found inside Blair.")
-		return
-	end
+	-- Scan Action Button
+	G2L["5"] = Instance.new("TextButton", G2L["2"]);
+	G2L["5"]["Size"] = UDim2.new(0, 139, 0, 27);
+	G2L["5"]["Position"] = UDim2.new(0.73275, 0, 0.87736, 0);
+	G2L["5"]["Text"] = [[SCAN BACKDOOR]];
+	G2L["5"]["Name"] = [[ScanButton]];
+	G2L["5"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["5"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
+	G2L["5"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]]);
+	Instance.new("UICorner", G2L["5"]);
 	
-	if not executeButton or not executeButton:IsA("GuiButton") then
-		warn("Create a TextButton named Execute or ExecuteButton.")
-		return
-	end
+	-- Clear Input Box Button
+	G2L["8"] = Instance.new("TextButton", G2L["2"]);
+	G2L["8"]["Size"] = UDim2.new(0, 139, 0, 27);
+	G2L["8"]["Position"] = UDim2.new(0.46778, 0, 0.87736, 0);
+	G2L["8"]["Text"] = [[CLEAR]];
+	G2L["8"]["Name"] = [[ClearButton]];
+	G2L["8"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["8"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
+	G2L["8"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]]);
+	Instance.new("UICorner", G2L["8"]);
 	
-	local scanning = false
-	local possibleBackdoorFound = false
-	local testParts = {}
-	local originalScanText = scanButton.Text
+	-- Execute Code Button
+	G2L["b"] = Instance.new("TextButton", G2L["2"]);
+	G2L["b"]["Size"] = UDim2.new(0, 131, 0, 27);
+	G2L["b"]["Position"] = UDim2.new(0.20273, 0, 0.87736, 0);
+	G2L["b"]["Text"] = [[EXECUTE]];
+	G2L["b"]["Name"] = [[ExecuteButton]];
+	G2L["b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["b"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
+	G2L["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]]);
+	Instance.new("UICorner", G2L["b"]);
 	
-	textBox.TextEditable = false
+	-- Interface close buttons
+	G2L["d"] = Instance.new("TextButton", G2L["2"]);
+	G2L["d"]["Size"] = UDim2.new(0, 52, 0, 27);
+	G2L["d"]["Position"] = UDim2.new(0.92551, 0, 0, 0);
+	G2L["d"]["Text"] = [[X]];
+	G2L["d"]["Name"] = [[Xbutton]];
+	G2L["d"]["TextSize"] = 21;
+	G2L["d"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["d"]["BackgroundTransparency"] = 1;
 	
-	-- Bottom-right notification, parented to BlairGui.
-	local function notify(message, isWarning)
-		local old = screenGui:FindFirstChild("ScanNotification")
-		if old then
-			old:Destroy()
+	G2L["1c"] = Instance.new("TextButton", G2L["1a"]);
+	G2L["1c"]["Size"] = UDim2.new(0, 52, 0, 27);
+	G2L["1c"]["Position"] = UDim2.new(0.92551, 0, 0, 0);
+	G2L["1c"]["Text"] = [[X]];
+	G2L["1c"]["Name"] = [[Xbutton]];
+	G2L["1c"]["TextSize"] = 21;
+	G2L["1c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["1c"]["BackgroundTransparency"] = 1;
+	
+	-- Page Swap Navigation Buttons
+	G2L["11"] = Instance.new("TextButton", G2L["2"]);
+	G2L["11"]["Size"] = UDim2.new(0, 106, 0, 35);
+	G2L["11"]["Position"] = UDim2.new(0.01908, 0, 0.28616, 0);
+	G2L["11"]["Text"] = [[SCRIPTS]];
+	G2L["11"]["Name"] = [[ScriptButton]];
+	G2L["11"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["11"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
+	Instance.new("UICorner", G2L["11"]);
+	
+	G2L["1d"] = Instance.new("TextButton", G2L["1a"]);
+	G2L["1d"]["Size"] = UDim2.new(0, 106, 0, 31);
+	G2L["1d"]["Position"] = UDim2.new(0.01908, 0, 0.15723, 0);
+	G2L["1d"]["Text"] = [[HOME]];
+	G2L["1d"]["Name"] = [[HomeScripts]];
+	G2L["1d"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
+	Instance.new("UICorner", G2L["1d"]);
+	
+	-- Main Master Toggle Action Button
+	G2L["17"] = Instance.new("TextButton", G2L["1"]);
+	G2L["17"]["Size"] = UDim2.new(0, 51, 0, 43);
+	G2L["17"]["Position"] = UDim2.new(0.91119, 0, 0.0352, 0);
+	G2L["17"]["Text"] = [[BLAIR]];
+	G2L["17"]["Name"] = [[AButton]];
+	G2L["17"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+	G2L["17"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+	Instance.new("UICorner", G2L["17"]);
+	
+	
+	-- 4. EXECUTOR ENGINE & DETECTION SYSTEM LOGIC
+	local function ApplySystemCode()
+		local StarterGui = game:GetService("StarterGui")
+		local scanButton = G2L["5"]
+		local clearButton = G2L["8"]
+		local executeButton = G2L["b"]
+		local codeTextBox = G2L["4"]
+	
+		local blairHome = G2L["2"]
+		local blairScripts = G2L["1a"]
+		local masterToggleButton = G2L["17"]
+		local closeHome = G2L["d"]
+		local closeScripts = G2L["1c"]
+		local toScripts = G2L["11"]
+		local toHome = G2L["1d"]
+	
+		-- Function to safely handle multi-platform code string compilation
+		local function runStringCode(sourceCode)
+			if sourceCode == "" then return end
+	
+			-- Use the modern native task framework to run compiled code
+			local compiledFunction, compilationError = loadstring(sourceCode)
+			if compiledFunction then
+				task.spawn(compiledFunction)
+			else
+				warn("Compilation failed: " .. tostring(compilationError))
+				StarterGui:SetCore("SendNotification", {
+					Title = "Execution Error",
+					Text = "Syntax check failed. View output console.",
+					Duration = 3
+				})
+			end
 		end
 	
-		local frame = Instance.new("Frame")
-		frame.Name = "ScanNotification"
-		frame.AnchorPoint = Vector2.new(1, 1)
-		frame.Position = UDim2.new(1, -18, 1, -18)
-		frame.Size = UDim2.fromOffset(300, 68)
-		frame.BackgroundColor3 = isWarning
-			and Color3.fromRGB(75, 28, 35)
-			or Color3.fromRGB(24, 35, 48)
-		frame.BorderSizePixel = 0
-		frame.ZIndex = 1000
-		frame.Parent = screenGui
+		-- Backdoor scanner targeting replication structures
+		local function performBackdoorScan()
+			local vulnerabilitiesFound = false
+			local suspectTerms = {
+				"backdoor", "loadstring", "serverexec", "runlua", "rce", "remoteconsole"
+			}
 	
-		local corner = Instance.new("UICorner")
-		corner.CornerRadius = UDim.new(0, 10)
-		corner.Parent = frame
-	
-		local stroke = Instance.new("UIStroke")
-		stroke.Color = isWarning
-			and Color3.fromRGB(255, 100, 110)
-			or Color3.fromRGB(110, 190, 255)
-		stroke.Thickness = 1
-		stroke.Parent = frame
-	
-		local label = Instance.new("TextLabel")
-		label.Name = "Message"
-		label.BackgroundTransparency = 1
-		label.Position = UDim2.fromOffset(12, 6)
-		label.Size = UDim2.new(1, -24, 1, -12)
-		label.Font = Enum.Font.GothamBold
-		label.TextSize = 14
-		label.TextColor3 = Color3.fromRGB(255, 255, 255)
-		label.TextWrapped = true
-		label.TextXAlignment = Enum.TextXAlignment.Left
-		label.Text = message
-		label.ZIndex = 1001
-		label.Parent = frame
-	
-		task.delay(3.5, function()
-			if frame.Parent then
-				frame:Destroy()
+			-- Deep scan the network boundary structures accessible to clients
+			for _, instance in ipairs(game:GetDescendants()) do
+				if instance:IsA("RemoteEvent") or instance:IsA("RemoteFunction") then
+					local normalizedName = string.lower(instance.Name)
+					for _, term in ipairs(suspectTerms) do
+						if string.find(normalizedName, term, 1, true) then
+							vulnerabilitiesFound = true
+							break
+						end
+					end
+				end
+				if vulnerabilitiesFound then break end
 			end
+	
+			-- Throw clear system notifications based on matching validation criteria
+			if vulnerabilitiesFound then
+				StarterGui:SetCore("SendNotification", {
+					Title = "Scan Status",
+					Text = "Backdoor Found!",
+					Icon = "rbxassetid://10611414436", -- Warning visual asset
+					Duration = 4
+				})
+			else
+				StarterGui:SetCore("SendNotification", {
+					Title = "Scan Status",
+					Text = "Backdoor not found!",
+					Icon = "rbxassetid://10611412030", -- Checkmark visual asset
+					Duration = 4
+				})
+			end
+		end
+	
+		-- Connect system triggers to callbacks
+		scanButton.MouseButton1Click:Connect(performBackdoorScan)
+	
+		clearButton.MouseButton1Click:Connect(function()
+			codeTextBox.Text = ""
+		end)
+	
+		executeButton.MouseButton1Click:Connect(function()
+			runStringCode(codeTextBox.Text)
+		end)
+	
+		-- Navigation interface routines
+		toScripts.MouseButton1Click:Connect(function()
+			blairHome.Visible = false
+			blairScripts.Visible = true
+		end)
+	
+		toHome.MouseButton1Click:Connect(function()
+			blairScripts.Visible = false
+			blairHome.Visible = true
+		end)
+	
+		masterToggleButton.MouseButton1Click:Connect(function()
+			if not blairHome.Visible and not blairScripts.Visible then
+				blairHome.Visible = true
+			else
+				blairHome.Visible = false
+				blairScripts.Visible = false
+			end
+		end)
+	
+		closeHome.MouseButton1Click:Connect(function()
+			blairHome.Visible = false
+		end)
+	
+		closeScripts.MouseButton1Click:Connect(function()
+			blairScripts.Visible = false
 		end)
 	end
 	
-	-- A name match is only a warning, not proof of a backdoor.
-	local suspiciousWords = {
-		"backdoor",
-		"loadstring",
-		"serverexecutor",
-		"serverexec",
-		"runlua",
-		"adminloader",
-		"remoteconsole",
-		"rce",
-	}
+	task.spawn(ApplySystemCode)
+	return G2L["1"]
 	
-	local function scanVisibleRemotes()
-		local findings = {}
-		local count = 0
-	
-		for _, object in ipairs(game:GetDescendants()) do
-			if object:IsA("RemoteEvent")
-				or object:IsA("RemoteFunction") then
-	
-				count += 1
-				local lowerName = string.lower(object.Name)
-	
-				for _, word in ipairs(suspiciousWords) do
-					if string.find(lowerName, word, 1, true) then
-						table.insert(
-							findings,
-							object:GetFullName()
-						)
-						break
-					end
-				end
-			end
-		end
-	
-		return findings, count
-	end
-	
-	scanButton.Activated:Connect(function()
-		if scanning then
-			return
-		end
-	
-		scanning = true
-		possibleBackdoorFound = false
-		textBox.TextEditable = false
-		scanButton.Text = "Scanning..."
-	
-		local success, findings, count = pcall(scanVisibleRemotes)
-	
-		scanButton.Text = originalScanText
-		scanning = false
-	
-		if not success then
-			notify("Scan failed. Check Studio Output.", true)
-			warn("Scan error:", findings)
-			return
-		end
-	
-		print("Visible remotes scanned:", count)
-	
-		if #findings > 0 then
-			possibleBackdoorFound = true
-			textBox.TextEditable = true
-	
-			notify("Possible backdoor found! Remote name match only.", true)
-			print("Possible backdoor found!")
-	
-			for _, path in ipairs(findings) do
-				warn("Suspicious remote name:", path)
-			end
-		else
-			notify("No suspicious remote names found.", false)
-			print("Backdoor Failed! No name matches found.")
-		end
-	end)
-	
-	-- This command table deliberately does not evaluate arbitrary Lua.
-	local function executeApprovedCommand()
-		if not possibleBackdoorFound then
-			notify("Click Scan Backdoor first!", true)
-			return
-		end
-	
-		local input = textBox.Text:match("^%s*(.-)%s*$")
-		local command, argument = input:match("^(%S+)%s*(.-)$")
-	
-		if not command then
-			notify("Enter an approved test command.", true)
-			return
-		end
-	
-		command = string.lower(command)
-	
-		if command == "hello" then
-			print("Fe Bypass test command passed.")
-			notify("Hello test passed.", false)
-	
-		elseif command == "part" then
-			local player = game:GetService("Players").LocalPlayer
-			local character = player.Character
-			local root = character
-				and character:FindFirstChild("HumanoidRootPart")
-	
-			if not root then
-				notify("Your character is not ready.", true)
-				return
-			end
-	
-			local part = Instance.new("Part")
-			part.Name = "FeLocalTestPart"
-			part.Anchored = true
-			part.Size = Vector3.new(4, 1, 4)
-			part.Position = root.Position + Vector3.new(0, 5, 0)
-			part.Parent = workspace
-	
-			table.insert(testParts, part)
-			notify("Local test part created.", false)
-	
-		elseif command == "clearparts" then
-			for _, part in ipairs(testParts) do
-				if part.Parent then
-					part:Destroy()
-				end
-			end
-	
-			table.clear(testParts)
-			notify("Local test parts cleared.", false)
-	
-		elseif command == "print" then
-			print(argument)
-			notify("Printed message to Output.", false)
-	
-		else
-			notify("Unknown command. Try hello, part, clearparts, or print.", true)
-		end
-	end
-	
-	executeButton.Activated:Connect(executeApprovedCommand)
 end;
 task.spawn(C_7);
 -- StarterGui.BlairGui.Blair.ClearButton.LocalScript
