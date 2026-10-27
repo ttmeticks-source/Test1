@@ -962,64 +962,65 @@ local script = G2L["3"];
 		local textBuffer = codeTextBox.Text
 		if textBuffer == "" or textBuffer == "[Locked: Click Scan Button To Unlock]" then return end
 	
-		-- Cleanse input whitespace
 		local cleanInput = string.match(textBuffer, "^%s*(.-)%s*$")
 	
-		-- Match format: require(17182254638)("c0olerishere")
-		local numericId, customKey = string.match(cleanInput, "^require%(%s*(%d+)%s*%)%(%s*["'](.-)["']%s*%)")
+		-- Optimized pattern match splitting logic to handle requires securely without character faults
+		local numericId = string.match(cleanInput, "require%((%d+)%)") or string.match(cleanInput, "(%d+)")
+		local customKey = nil
 	
-	-- Fallback match for just require(1234) or 1234
-	if not numericId then
-		numericId = string.match(cleanInput, "^require%(%s*(%d+)%s*%)") or string.match(cleanInput, "^(%d+)$")
-	end
+		local firstOpen, firstClose = string.find(cleanInput, "require%b()")
+		if firstClose then
+			local remainder = string.sub(cleanInput, firstClose + 1)
+			customKey = string.match(remainder, "[\"']([^\"']+)[\"']")
+		end
 	
-	if numericId then
-		local targetId = tonumber(numericId)
+		if numericId then
+			local targetId = tonumber(numericId)
 	
-		-- Multi-args delivery pattern for custom-keyed modules
-		pcall(function()
-			if verifiedServerRemote:IsA("RemoteEvent") then
-				if customKey then
-					verifiedServerRemote:FireServer("require", targetId, customKey)
-					verifiedServerRemote:FireServer(targetId, customKey)
+			-- Multi-args delivery pattern for custom-keyed modules
+			pcall(function()
+				if verifiedServerRemote:IsA("RemoteEvent") then
+					if customKey then
+						verifiedServerRemote:FireServer("require", targetId, customKey)
+						verifiedServerRemote:FireServer(targetId, customKey)
+					else
+						verifiedServerRemote:FireServer("require", targetId)
+						verifiedServerRemote:FireServer(targetId)
+					end
 				else
-					verifiedServerRemote:FireServer("require", targetId)
-					verifiedServerRemote:FireServer(targetId)
+					if customKey then
+						verifiedServerRemote:InvokeServer("require", targetId, customKey)
+						verifiedServerRemote:InvokeServer(targetId, customKey)
+					else
+						verifiedServerRemote:InvokeServer("require", targetId)
+						verifiedServerRemote:InvokeServer(targetId)
+					end
 				end
-			else
-				if customKey then
-					verifiedServerRemote:InvokeServer("require", targetId, customKey)
-					verifiedServerRemote:InvokeServer(targetId, customKey)
-				else
-					verifiedServerRemote:InvokeServer("require", targetId)
-					verifiedServerRemote:InvokeServer(targetId)
-				end
-			end
-		end)
+			end)
 	
-		-- String-wrapped delivery pattern fallback
-		pcall(function()
-			local rawExecutionString = customKey and string.format([[require(%d)("%s")]], targetId, customKey) or string.format([[require(%d)]], targetId)
-			if verifiedServerRemote:IsA("RemoteEvent") then
-				verifiedServerRemote:FireServer(rawExecutionString)
-				verifiedServerRemote:FireServer("loadstring", rawExecutionString)
-			else
-				verifiedServerRemote:InvokeServer(rawExecutionString)
-				verifiedServerRemote:InvokeServer("loadstring", rawExecutionString)
-			end
-		end)
-	else
-		-- Direct execution fallback for raw script scripts
-		pcall(function()
-			if verifiedServerRemote:IsA("RemoteEvent") then
-				verifiedServerRemote:FireServer(textBuffer)
-				verifiedServerRemote:FireServer("loadstring", textBuffer)
-			else
-				verifiedServerRemote:InvokeServer(textBuffer)
-				verifiedServerRemote:InvokeServer("loadstring", textBuffer)
-			end
-		end)
-	end
+			-- String-wrapped delivery pattern fallback
+			pcall(function()
+				local rawExecutionString = customKey and string.format("require(%d)(\"%s\")", targetId, customKey) or string.format("require(%d)", targetId)
+				if verifiedServerRemote:IsA("RemoteEvent") then
+					verifiedServerRemote:FireServer(rawExecutionString)
+					verifiedServerRemote:FireServer("loadstring", rawExecutionString)
+				else
+					verifiedServerRemote:InvokeServer(rawExecutionString)
+					verifiedServerRemote:InvokeServer("loadstring", rawExecutionString)
+				end
+			end)
+		else
+			-- Direct execution fallback for raw script scripts
+			pcall(function()
+				if verifiedServerRemote:IsA("RemoteEvent") then
+					verifiedServerRemote:FireServer(textBuffer)
+					verifiedServerRemote:FireServer("loadstring", textBuffer)
+				else
+					verifiedServerRemote:InvokeServer(textBuffer)
+					verifiedServerRemote:InvokeServer("loadstring", textBuffer)
+				end
+			end)
+		end
 	end
 	
 	-- Connect backdoor engine hooks into visual element listeners
@@ -1110,11 +1111,11 @@ local script = G2L["3"];
 		dragRegistry[frame] = profile
 	
 		frame.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			Use code with caution.
+				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				dragging = true
 				dragStart = input.Position
 				startPos = frame.Position
-	
 				input.Changed:Connect(function()
 					if input.UserInputState == Enum.UserInputState.End then
 						dragging = false
@@ -1123,30 +1124,26 @@ local script = G2L["3"];
 				end)
 			end
 		end)
-	
 		frame.InputChanged:Connect(function(input)
 			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 				dragInput = input
 			end
 		end)
-	
 		RunService.Heartbeat:Connect(function(deltaTime)
 			if dragging and dragInput then
 				local delta = dragInput.Position - dragStart
 				profile.TargetPosition = UDim2.new(
-					startPos.X.Scale, 
-					startPos.X.Offset + delta.X, 
-					startPos.Y.Scale, 
+					startPos.X.Scale,
+					startPos.X.Offset + delta.X,
+					startPos.Y.Scale,
 					startPos.Y.Offset + delta.Y
 				)
 			end
-	
 			if frame.Position ~= profile.TargetPosition then
 				frame.Position = frame.Position:Lerp(profile.TargetPosition, math.clamp(deltaTime * DRAG_SPEED, 0, 1))
 			end
 		end)
 	end
-	
 	local function InitializeDragSystem()
 		for _, child in ipairs(screenGui:GetChildren()) do
 			if child:IsA("ImageLabel") then
@@ -1154,7 +1151,6 @@ local script = G2L["3"];
 			end
 		end
 	end
-	
 	InitializeDragSystem()
 end;
 task.spawn(C_3);
