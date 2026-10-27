@@ -16,445 +16,444 @@ G2L["1"]["Name"] = [[BlairGui]];
 G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
 
 
+-- StarterGui.BlairGui.Control
+G2L["2"] = Instance.new("LocalScript", G2L["1"]);
+G2L["2"]["Name"] = [[Control]];
+
+
+-- StarterGui.BlairGui.DragScript
+G2L["3"] = Instance.new("LocalScript", G2L["1"]);
+G2L["3"]["Name"] = [[DragScript]];
+
+
+-- StarterGui.BlairGui.
+G2L["4"] = Instance.new("LocalScript", G2L["1"]);
+G2L["4"]["Name"] = [[]];
+
+
 -- StarterGui.BlairGui.Blair
-G2L["2"] = Instance.new("ImageLabel", G2L["1"]);
-G2L["2"]["BorderSizePixel"] = 0;
-G2L["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["2"]["Image"] = [[rbxassetid://129002638586770]];
-G2L["2"]["Size"] = UDim2.new(0, 629, 0, 318);
-G2L["2"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["2"]["Name"] = [[Blair]];
-G2L["2"]["Position"] = UDim2.new(0.13401, 0, 0.12407, 0);
+G2L["5"] = Instance.new("ImageLabel", G2L["1"]);
+G2L["5"]["BorderSizePixel"] = 0;
+G2L["5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["5"]["Image"] = [[rbxassetid://129002638586770]];
+G2L["5"]["Size"] = UDim2.new(0, 629, 0, 318);
+G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["5"]["Name"] = [[Blair]];
+G2L["5"]["Position"] = UDim2.new(0.13401, 0, 0.12407, 0);
 
 
 -- StarterGui.BlairGui.Blair.TextLabel
-G2L["3"] = Instance.new("TextLabel", G2L["2"]);
-G2L["3"]["TextWrapped"] = true;
-G2L["3"]["BorderSizePixel"] = 0;
-G2L["3"]["TextSize"] = 14;
-G2L["3"]["TextScaled"] = true;
-G2L["3"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["3"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["3"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["3"]["BackgroundTransparency"] = 1;
-G2L["3"]["Size"] = UDim2.new(0, 615, 0, 27);
-G2L["3"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["3"]["Text"] = [[Blair Backdoor - Private]];
-G2L["3"]["Position"] = UDim2.new(0.01759, 0, 0, 0);
+G2L["6"] = Instance.new("TextLabel", G2L["5"]);
+G2L["6"]["TextWrapped"] = true;
+G2L["6"]["BorderSizePixel"] = 0;
+G2L["6"]["TextSize"] = 14;
+G2L["6"]["TextScaled"] = true;
+G2L["6"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["6"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["6"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["6"]["BackgroundTransparency"] = 1;
+G2L["6"]["Size"] = UDim2.new(0, 615, 0, 27);
+G2L["6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["6"]["Text"] = [[Blair Backdoor - Private]];
+G2L["6"]["Position"] = UDim2.new(0.01759, 0, 0, 0);
 
 
 -- StarterGui.BlairGui.Blair.TextBox
-G2L["4"] = Instance.new("TextBox", G2L["2"]);
-G2L["4"]["CursorPosition"] = -1;
-G2L["4"]["BorderSizePixel"] = 0;
-G2L["4"]["TextWrapped"] = true;
-G2L["4"]["TextSize"] = 14;
-G2L["4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["4"]["BackgroundColor3"] = Color3.fromRGB(115, 116, 118);
-G2L["4"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["4"]["MultiLine"] = true;
-G2L["4"]["ClearTextOnFocus"] = false;
-G2L["4"]["Size"] = UDim2.new(0, 472, 0, 219);
-G2L["4"]["Position"] = UDim2.new(0.20432, 0, 0.15723, 0);
-G2L["4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["4"]["Text"] = [[]];
-G2L["4"]["BackgroundTransparency"] = 0.76;
+G2L["7"] = Instance.new("TextBox", G2L["5"]);
+G2L["7"]["BorderSizePixel"] = 0;
+G2L["7"]["TextWrapped"] = true;
+G2L["7"]["TextSize"] = 14;
+G2L["7"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["7"]["BackgroundColor3"] = Color3.fromRGB(115, 116, 118);
+G2L["7"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["7"]["MultiLine"] = true;
+G2L["7"]["ClearTextOnFocus"] = false;
+G2L["7"]["Size"] = UDim2.new(0, 472, 0, 219);
+G2L["7"]["Position"] = UDim2.new(0.20432, 0, 0.15723, 0);
+G2L["7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["7"]["Text"] = [[]];
+G2L["7"]["BackgroundTransparency"] = 0.76;
 
 
 -- StarterGui.BlairGui.Blair.ScanButton
-G2L["5"] = Instance.new("TextButton", G2L["2"]);
-G2L["5"]["BorderSizePixel"] = 0;
-G2L["5"]["TextSize"] = 14;
-G2L["5"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["5"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
-G2L["5"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["5"]["BackgroundTransparency"] = 0.3;
-G2L["5"]["Size"] = UDim2.new(0, 139, 0, 27);
-G2L["5"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["5"]["Text"] = [[SCAN BACKDOOR]];
-G2L["5"]["Name"] = [[ScanButton]];
-G2L["5"]["Position"] = UDim2.new(0.73275, 0, 0.87736, 0);
+G2L["8"] = Instance.new("TextButton", G2L["5"]);
+G2L["8"]["BorderSizePixel"] = 0;
+G2L["8"]["TextSize"] = 14;
+G2L["8"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["8"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
+G2L["8"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["8"]["BackgroundTransparency"] = 0.3;
+G2L["8"]["Size"] = UDim2.new(0, 139, 0, 27);
+G2L["8"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["8"]["Text"] = [[SCAN BACKDOOR]];
+G2L["8"]["Name"] = [[ScanButton]];
+G2L["8"]["Position"] = UDim2.new(0.73275, 0, 0.87736, 0);
 
 
 -- StarterGui.BlairGui.Blair.ScanButton.UICorner
-G2L["6"] = Instance.new("UICorner", G2L["5"]);
+G2L["9"] = Instance.new("UICorner", G2L["8"]);
 
 
 
 -- StarterGui.BlairGui.Blair.ClearButton
-G2L["7"] = Instance.new("TextButton", G2L["2"]);
-G2L["7"]["BorderSizePixel"] = 0;
-G2L["7"]["TextSize"] = 14;
-G2L["7"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["7"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
-G2L["7"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["7"]["BackgroundTransparency"] = 0.3;
-G2L["7"]["Size"] = UDim2.new(0, 139, 0, 27);
-G2L["7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["7"]["Text"] = [[CLEAR]];
-G2L["7"]["Name"] = [[ClearButton]];
-G2L["7"]["Position"] = UDim2.new(0.46778, 0, 0.87736, 0);
+G2L["a"] = Instance.new("TextButton", G2L["5"]);
+G2L["a"]["BorderSizePixel"] = 0;
+G2L["a"]["TextSize"] = 14;
+G2L["a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["a"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
+G2L["a"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["a"]["BackgroundTransparency"] = 0.3;
+G2L["a"]["Size"] = UDim2.new(0, 139, 0, 27);
+G2L["a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["a"]["Text"] = [[CLEAR]];
+G2L["a"]["Name"] = [[ClearButton]];
+G2L["a"]["Position"] = UDim2.new(0.46778, 0, 0.87736, 0);
 
 
 -- StarterGui.BlairGui.Blair.ClearButton.UICorner
-G2L["8"] = Instance.new("UICorner", G2L["7"]);
+G2L["b"] = Instance.new("UICorner", G2L["a"]);
 
 
 
 -- StarterGui.BlairGui.Blair.ExecuteButton
-G2L["9"] = Instance.new("TextButton", G2L["2"]);
-G2L["9"]["BorderSizePixel"] = 0;
-G2L["9"]["TextSize"] = 14;
-G2L["9"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["9"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
-G2L["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["9"]["BackgroundTransparency"] = 0.3;
-G2L["9"]["Size"] = UDim2.new(0, 131, 0, 27);
-G2L["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["9"]["Text"] = [[EXECUTE]];
-G2L["9"]["Name"] = [[ExecuteButton]];
-G2L["9"]["Position"] = UDim2.new(0.20273, 0, 0.87736, 0);
+G2L["c"] = Instance.new("TextButton", G2L["5"]);
+G2L["c"]["BorderSizePixel"] = 0;
+G2L["c"]["TextSize"] = 14;
+G2L["c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["c"]["BackgroundColor3"] = Color3.fromRGB(50, 50, 50);
+G2L["c"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["c"]["BackgroundTransparency"] = 0.3;
+G2L["c"]["Size"] = UDim2.new(0, 131, 0, 27);
+G2L["c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["c"]["Text"] = [[EXECUTE]];
+G2L["c"]["Name"] = [[ExecuteButton]];
+G2L["c"]["Position"] = UDim2.new(0.20273, 0, 0.87736, 0);
 
 
 -- StarterGui.BlairGui.Blair.ExecuteButton.UICorner
-G2L["a"] = Instance.new("UICorner", G2L["9"]);
+G2L["d"] = Instance.new("UICorner", G2L["c"]);
 
 
 
 -- StarterGui.BlairGui.Blair.Xbutton
-G2L["b"] = Instance.new("TextButton", G2L["2"]);
-G2L["b"]["BorderSizePixel"] = 0;
-G2L["b"]["TextSize"] = 21;
-G2L["b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["b"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["b"]["BackgroundTransparency"] = 1;
-G2L["b"]["Size"] = UDim2.new(0, 52, 0, 27);
-G2L["b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["b"]["Text"] = [[X]];
-G2L["b"]["Name"] = [[Xbutton]];
-G2L["b"]["Position"] = UDim2.new(0.92551, 0, 0, 0);
+G2L["e"] = Instance.new("TextButton", G2L["5"]);
+G2L["e"]["BorderSizePixel"] = 0;
+G2L["e"]["TextSize"] = 21;
+G2L["e"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["e"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["e"]["BackgroundTransparency"] = 1;
+G2L["e"]["Size"] = UDim2.new(0, 52, 0, 27);
+G2L["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["e"]["Text"] = [[X]];
+G2L["e"]["Name"] = [[Xbutton]];
+G2L["e"]["Position"] = UDim2.new(0.92551, 0, 0, 0);
 
 
 -- StarterGui.BlairGui.Blair.Xbutton.LocalScript
-G2L["c"] = Instance.new("LocalScript", G2L["b"]);
+G2L["f"] = Instance.new("LocalScript", G2L["e"]);
 
 
 
 -- StarterGui.BlairGui.Blair.HomeScripts
-G2L["d"] = Instance.new("TextButton", G2L["2"]);
-G2L["d"]["BorderSizePixel"] = 0;
-G2L["d"]["TextSize"] = 14;
-G2L["d"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["d"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
-G2L["d"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["d"]["BackgroundTransparency"] = 0.3;
-G2L["d"]["Size"] = UDim2.new(0, 106, 0, 31);
-G2L["d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["d"]["Text"] = [[HOME]];
-G2L["d"]["Name"] = [[HomeScripts]];
-G2L["d"]["Position"] = UDim2.new(0.01908, 0, 0.15723, 0);
-
-
--- StarterGui.BlairGui.Blair.HomeScripts.UICorner
-G2L["e"] = Instance.new("UICorner", G2L["d"]);
-
-
-
--- StarterGui.BlairGui.Blair.HomeScripts.UIStroke
-G2L["f"] = Instance.new("UIStroke", G2L["d"]);
-G2L["f"]["Thickness"] = 0.6;
-G2L["f"]["Color"] = Color3.fromRGB(101, 101, 101);
-G2L["f"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-
-
--- StarterGui.BlairGui.Blair.ScriptButton
-G2L["10"] = Instance.new("TextButton", G2L["2"]);
+G2L["10"] = Instance.new("TextButton", G2L["5"]);
 G2L["10"]["BorderSizePixel"] = 0;
 G2L["10"]["TextSize"] = 14;
 G2L["10"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["10"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
 G2L["10"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["10"]["BackgroundTransparency"] = 0.3;
-G2L["10"]["Size"] = UDim2.new(0, 106, 0, 35);
+G2L["10"]["Size"] = UDim2.new(0, 106, 0, 31);
 G2L["10"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["10"]["Text"] = [[SCRIPTS]];
-G2L["10"]["Name"] = [[ScriptButton]];
-G2L["10"]["Position"] = UDim2.new(0.01908, 0, 0.28616, 0);
+G2L["10"]["Text"] = [[HOME]];
+G2L["10"]["Name"] = [[HomeScripts]];
+G2L["10"]["Position"] = UDim2.new(0.01908, 0, 0.15723, 0);
 
 
--- StarterGui.BlairGui.Blair.ScriptButton.UICorner
+-- StarterGui.BlairGui.Blair.HomeScripts.UICorner
 G2L["11"] = Instance.new("UICorner", G2L["10"]);
 
 
 
+-- StarterGui.BlairGui.Blair.HomeScripts.UIStroke
+G2L["12"] = Instance.new("UIStroke", G2L["10"]);
+G2L["12"]["Thickness"] = 0.6;
+G2L["12"]["Color"] = Color3.fromRGB(101, 101, 101);
+G2L["12"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.BlairGui.Blair.ScriptButton
+G2L["13"] = Instance.new("TextButton", G2L["5"]);
+G2L["13"]["BorderSizePixel"] = 0;
+G2L["13"]["TextSize"] = 14;
+G2L["13"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["13"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
+G2L["13"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["13"]["BackgroundTransparency"] = 0.3;
+G2L["13"]["Size"] = UDim2.new(0, 106, 0, 35);
+G2L["13"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["13"]["Text"] = [[SCRIPTS]];
+G2L["13"]["Name"] = [[ScriptButton]];
+G2L["13"]["Position"] = UDim2.new(0.01908, 0, 0.28616, 0);
+
+
+-- StarterGui.BlairGui.Blair.ScriptButton.UICorner
+G2L["14"] = Instance.new("UICorner", G2L["13"]);
+
+
+
 -- StarterGui.BlairGui.Blair.CreditsButton
-G2L["12"] = Instance.new("TextButton", G2L["2"]);
-G2L["12"]["BorderSizePixel"] = 0;
-G2L["12"]["TextSize"] = 14;
-G2L["12"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["12"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
-G2L["12"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["12"]["BackgroundTransparency"] = 0.3;
-G2L["12"]["Size"] = UDim2.new(0, 106, 0, 25);
-G2L["12"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["12"]["Text"] = [[CREDITS]];
-G2L["12"]["Name"] = [[CreditsButton]];
-G2L["12"]["Position"] = UDim2.new(0.01908, 0, 0.74214, 0);
+G2L["15"] = Instance.new("TextButton", G2L["5"]);
+G2L["15"]["BorderSizePixel"] = 0;
+G2L["15"]["TextSize"] = 14;
+G2L["15"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["15"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
+G2L["15"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["15"]["BackgroundTransparency"] = 0.3;
+G2L["15"]["Size"] = UDim2.new(0, 106, 0, 25);
+G2L["15"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["15"]["Text"] = [[CREDITS]];
+G2L["15"]["Name"] = [[CreditsButton]];
+G2L["15"]["Position"] = UDim2.new(0.01908, 0, 0.74214, 0);
 
 
 -- StarterGui.BlairGui.Blair.CreditsButton.UICorner
-G2L["13"] = Instance.new("UICorner", G2L["12"]);
+G2L["16"] = Instance.new("UICorner", G2L["15"]);
 
 
 
 -- StarterGui.BlairGui.Blair.InfoButton
-G2L["14"] = Instance.new("TextButton", G2L["2"]);
-G2L["14"]["BorderSizePixel"] = 0;
-G2L["14"]["TextSize"] = 14;
-G2L["14"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["14"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
-G2L["14"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["14"]["BackgroundTransparency"] = 0.3;
-G2L["14"]["Size"] = UDim2.new(0, 106, 0, 35);
-G2L["14"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["14"]["Text"] = [[INFO]];
-G2L["14"]["Name"] = [[InfoButton]];
-G2L["14"]["Position"] = UDim2.new(0.01908, 0, 0.42453, 0);
+G2L["17"] = Instance.new("TextButton", G2L["5"]);
+G2L["17"]["BorderSizePixel"] = 0;
+G2L["17"]["TextSize"] = 14;
+G2L["17"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["17"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
+G2L["17"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["17"]["BackgroundTransparency"] = 0.3;
+G2L["17"]["Size"] = UDim2.new(0, 106, 0, 35);
+G2L["17"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["17"]["Text"] = [[INFO]];
+G2L["17"]["Name"] = [[InfoButton]];
+G2L["17"]["Position"] = UDim2.new(0.01908, 0, 0.42453, 0);
 
 
 -- StarterGui.BlairGui.Blair.InfoButton.UICorner
-G2L["15"] = Instance.new("UICorner", G2L["14"]);
+G2L["18"] = Instance.new("UICorner", G2L["17"]);
 
 
 
 -- StarterGui.BlairGui.AButton
-G2L["16"] = Instance.new("TextButton", G2L["1"]);
-G2L["16"]["BorderSizePixel"] = 0;
-G2L["16"]["TextSize"] = 14;
-G2L["16"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["16"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["16"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["16"]["Size"] = UDim2.new(0, 51, 0, 43);
-G2L["16"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["16"]["Text"] = [[BLAIR]];
-G2L["16"]["Name"] = [[AButton]];
-G2L["16"]["Position"] = UDim2.new(0.91119, 0, 0.0352, 0);
+G2L["19"] = Instance.new("TextButton", G2L["1"]);
+G2L["19"]["BorderSizePixel"] = 0;
+G2L["19"]["TextSize"] = 14;
+G2L["19"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["19"]["BackgroundColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["19"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["19"]["Size"] = UDim2.new(0, 51, 0, 43);
+G2L["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["19"]["Text"] = [[BLAIR]];
+G2L["19"]["Name"] = [[AButton]];
+G2L["19"]["Position"] = UDim2.new(0.91119, 0, 0.0352, 0);
 
 
 -- StarterGui.BlairGui.AButton.UICorner
-G2L["17"] = Instance.new("UICorner", G2L["16"]);
+G2L["1a"] = Instance.new("UICorner", G2L["19"]);
 
 
 
 -- StarterGui.BlairGui.Blair1
-G2L["18"] = Instance.new("ImageLabel", G2L["1"]);
-G2L["18"]["BorderSizePixel"] = 0;
-G2L["18"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["18"]["Image"] = [[rbxassetid://129002638586770]];
-G2L["18"]["Size"] = UDim2.new(0, 629, 0, 318);
-G2L["18"]["Visible"] = false;
-G2L["18"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["18"]["Name"] = [[Blair1]];
-G2L["18"]["Position"] = UDim2.new(0.13514, 0, 0.12407, 0);
+G2L["1b"] = Instance.new("ImageLabel", G2L["1"]);
+G2L["1b"]["BorderSizePixel"] = 0;
+G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["1b"]["Image"] = [[rbxassetid://129002638586770]];
+G2L["1b"]["Size"] = UDim2.new(0, 629, 0, 318);
+G2L["1b"]["Visible"] = false;
+G2L["1b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1b"]["Name"] = [[Blair1]];
+G2L["1b"]["Position"] = UDim2.new(0.13514, 0, 0.12407, 0);
 
 
 -- StarterGui.BlairGui.Blair1.TextLabel
-G2L["19"] = Instance.new("TextLabel", G2L["18"]);
-G2L["19"]["TextWrapped"] = true;
-G2L["19"]["BorderSizePixel"] = 0;
-G2L["19"]["TextSize"] = 14;
-G2L["19"]["TextScaled"] = true;
-G2L["19"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["19"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["19"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["19"]["BackgroundTransparency"] = 1;
-G2L["19"]["Size"] = UDim2.new(0, 615, 0, 27);
-G2L["19"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["19"]["Text"] = [[Blair Backdoor - Private Backdoor]];
-G2L["19"]["Position"] = UDim2.new(0.02077, 0, 0, 0);
+G2L["1c"] = Instance.new("TextLabel", G2L["1b"]);
+G2L["1c"]["TextWrapped"] = true;
+G2L["1c"]["BorderSizePixel"] = 0;
+G2L["1c"]["TextSize"] = 14;
+G2L["1c"]["TextScaled"] = true;
+G2L["1c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["1c"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["1c"]["BackgroundTransparency"] = 1;
+G2L["1c"]["Size"] = UDim2.new(0, 615, 0, 27);
+G2L["1c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1c"]["Text"] = [[Blair Backdoor - Private Backdoor]];
+G2L["1c"]["Position"] = UDim2.new(0.02077, 0, 0, 0);
 
 
 -- StarterGui.BlairGui.Blair1.Xbutton
-G2L["1a"] = Instance.new("TextButton", G2L["18"]);
-G2L["1a"]["BorderSizePixel"] = 0;
-G2L["1a"]["TextSize"] = 21;
-G2L["1a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["1a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["1a"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["1a"]["BackgroundTransparency"] = 1;
-G2L["1a"]["Size"] = UDim2.new(0, 52, 0, 27);
-G2L["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1a"]["Text"] = [[X]];
-G2L["1a"]["Name"] = [[Xbutton]];
-G2L["1a"]["Position"] = UDim2.new(0.92551, 0, 0, 0);
+G2L["1d"] = Instance.new("TextButton", G2L["1b"]);
+G2L["1d"]["BorderSizePixel"] = 0;
+G2L["1d"]["TextSize"] = 21;
+G2L["1d"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["1d"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1d"]["BackgroundTransparency"] = 1;
+G2L["1d"]["Size"] = UDim2.new(0, 52, 0, 27);
+G2L["1d"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1d"]["Text"] = [[X]];
+G2L["1d"]["Name"] = [[Xbutton]];
+G2L["1d"]["Position"] = UDim2.new(0.92551, 0, 0, 0);
 
 
 -- StarterGui.BlairGui.Blair1.Xbutton.LocalScript
-G2L["1b"] = Instance.new("LocalScript", G2L["1a"]);
+G2L["1e"] = Instance.new("LocalScript", G2L["1d"]);
 
 
 
 -- StarterGui.BlairGui.Blair1.HomeScripts
-G2L["1c"] = Instance.new("TextButton", G2L["18"]);
-G2L["1c"]["BorderSizePixel"] = 0;
-G2L["1c"]["TextSize"] = 14;
-G2L["1c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["1c"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
-G2L["1c"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["1c"]["BackgroundTransparency"] = 0.3;
-G2L["1c"]["Size"] = UDim2.new(0, 106, 0, 31);
-G2L["1c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1c"]["Text"] = [[HOME]];
-G2L["1c"]["Name"] = [[HomeScripts]];
-G2L["1c"]["Position"] = UDim2.new(0.01908, 0, 0.15723, 0);
+G2L["1f"] = Instance.new("TextButton", G2L["1b"]);
+G2L["1f"]["BorderSizePixel"] = 0;
+G2L["1f"]["TextSize"] = 14;
+G2L["1f"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["1f"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
+G2L["1f"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["1f"]["BackgroundTransparency"] = 0.3;
+G2L["1f"]["Size"] = UDim2.new(0, 106, 0, 31);
+G2L["1f"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["1f"]["Text"] = [[HOME]];
+G2L["1f"]["Name"] = [[HomeScripts]];
+G2L["1f"]["Position"] = UDim2.new(0.01908, 0, 0.15723, 0);
 
 
 -- StarterGui.BlairGui.Blair1.HomeScripts.UICorner
-G2L["1d"] = Instance.new("UICorner", G2L["1c"]);
+G2L["20"] = Instance.new("UICorner", G2L["1f"]);
 
 
 
 -- StarterGui.BlairGui.Blair1.ScriptButton
-G2L["1e"] = Instance.new("TextButton", G2L["18"]);
-G2L["1e"]["BorderSizePixel"] = 0;
-G2L["1e"]["TextSize"] = 14;
-G2L["1e"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["1e"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
-G2L["1e"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["1e"]["BackgroundTransparency"] = 0.3;
-G2L["1e"]["Size"] = UDim2.new(0, 106, 0, 35);
-G2L["1e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["1e"]["Text"] = [[SCRIPTS]];
-G2L["1e"]["Name"] = [[ScriptButton]];
-G2L["1e"]["Position"] = UDim2.new(0.01908, 0, 0.28616, 0);
-
-
--- StarterGui.BlairGui.Blair1.ScriptButton.UICorner
-G2L["1f"] = Instance.new("UICorner", G2L["1e"]);
-
-
-
--- StarterGui.BlairGui.Blair1.ScriptButton.UIStroke
-G2L["20"] = Instance.new("UIStroke", G2L["1e"]);
-G2L["20"]["Thickness"] = 0.6;
-G2L["20"]["Color"] = Color3.fromRGB(101, 101, 101);
-G2L["20"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
-
-
--- StarterGui.BlairGui.Blair1.CreditsButton
-G2L["21"] = Instance.new("TextButton", G2L["18"]);
+G2L["21"] = Instance.new("TextButton", G2L["1b"]);
 G2L["21"]["BorderSizePixel"] = 0;
 G2L["21"]["TextSize"] = 14;
 G2L["21"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 G2L["21"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
 G2L["21"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 G2L["21"]["BackgroundTransparency"] = 0.3;
-G2L["21"]["Size"] = UDim2.new(0, 106, 0, 25);
+G2L["21"]["Size"] = UDim2.new(0, 106, 0, 35);
 G2L["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["21"]["Text"] = [[CREDITS]];
-G2L["21"]["Name"] = [[CreditsButton]];
-G2L["21"]["Position"] = UDim2.new(0.01908, 0, 0.74214, 0);
+G2L["21"]["Text"] = [[SCRIPTS]];
+G2L["21"]["Name"] = [[ScriptButton]];
+G2L["21"]["Position"] = UDim2.new(0.01908, 0, 0.28616, 0);
 
 
--- StarterGui.BlairGui.Blair1.CreditsButton.UICorner
+-- StarterGui.BlairGui.Blair1.ScriptButton.UICorner
 G2L["22"] = Instance.new("UICorner", G2L["21"]);
 
 
 
+-- StarterGui.BlairGui.Blair1.ScriptButton.UIStroke
+G2L["23"] = Instance.new("UIStroke", G2L["21"]);
+G2L["23"]["Thickness"] = 0.6;
+G2L["23"]["Color"] = Color3.fromRGB(101, 101, 101);
+G2L["23"]["ApplyStrokeMode"] = Enum.ApplyStrokeMode.Border;
+
+
+-- StarterGui.BlairGui.Blair1.CreditsButton
+G2L["24"] = Instance.new("TextButton", G2L["1b"]);
+G2L["24"]["BorderSizePixel"] = 0;
+G2L["24"]["TextSize"] = 14;
+G2L["24"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["24"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
+G2L["24"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["24"]["BackgroundTransparency"] = 0.3;
+G2L["24"]["Size"] = UDim2.new(0, 106, 0, 25);
+G2L["24"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["24"]["Text"] = [[CREDITS]];
+G2L["24"]["Name"] = [[CreditsButton]];
+G2L["24"]["Position"] = UDim2.new(0.01908, 0, 0.74214, 0);
+
+
+-- StarterGui.BlairGui.Blair1.CreditsButton.UICorner
+G2L["25"] = Instance.new("UICorner", G2L["24"]);
+
+
+
 -- StarterGui.BlairGui.Blair1.InfoButton
-G2L["23"] = Instance.new("TextButton", G2L["18"]);
-G2L["23"]["BorderSizePixel"] = 0;
-G2L["23"]["TextSize"] = 14;
-G2L["23"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["23"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
-G2L["23"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["23"]["BackgroundTransparency"] = 0.3;
-G2L["23"]["Size"] = UDim2.new(0, 106, 0, 35);
-G2L["23"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["23"]["Text"] = [[INFO]];
-G2L["23"]["Name"] = [[InfoButton]];
-G2L["23"]["Position"] = UDim2.new(0.01908, 0, 0.42453, 0);
+G2L["26"] = Instance.new("TextButton", G2L["1b"]);
+G2L["26"]["BorderSizePixel"] = 0;
+G2L["26"]["TextSize"] = 14;
+G2L["26"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["26"]["BackgroundColor3"] = Color3.fromRGB(42, 42, 42);
+G2L["26"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["26"]["BackgroundTransparency"] = 0.3;
+G2L["26"]["Size"] = UDim2.new(0, 106, 0, 35);
+G2L["26"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["26"]["Text"] = [[INFO]];
+G2L["26"]["Name"] = [[InfoButton]];
+G2L["26"]["Position"] = UDim2.new(0.01908, 0, 0.42453, 0);
 
 
 -- StarterGui.BlairGui.Blair1.InfoButton.UICorner
-G2L["24"] = Instance.new("UICorner", G2L["23"]);
+G2L["27"] = Instance.new("UICorner", G2L["26"]);
 
 
 
 -- StarterGui.BlairGui.Blair1.TextButton
-G2L["25"] = Instance.new("TextButton", G2L["18"]);
-G2L["25"]["TextWrapped"] = true;
-G2L["25"]["BorderSizePixel"] = 0;
-G2L["25"]["TextSize"] = 14;
-G2L["25"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["25"]["BackgroundColor3"] = Color3.fromRGB(95, 95, 95);
-G2L["25"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["25"]["BackgroundTransparency"] = 0.6;
-G2L["25"]["Size"] = UDim2.new(0, 134, 0, 31);
-G2L["25"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["25"]["Text"] = [[C0OLED HINT]];
-G2L["25"]["Position"] = UDim2.new(0.22734, 0, 0.18553, 0);
+G2L["28"] = Instance.new("TextButton", G2L["1b"]);
+G2L["28"]["TextWrapped"] = true;
+G2L["28"]["BorderSizePixel"] = 0;
+G2L["28"]["TextSize"] = 14;
+G2L["28"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["28"]["BackgroundColor3"] = Color3.fromRGB(95, 95, 95);
+G2L["28"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["28"]["BackgroundTransparency"] = 0.6;
+G2L["28"]["Size"] = UDim2.new(0, 134, 0, 31);
+G2L["28"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["28"]["Text"] = [[C0OLED HINT]];
+G2L["28"]["Position"] = UDim2.new(0.22734, 0, 0.18553, 0);
 
 
 -- StarterGui.BlairGui.Blair1.TextButton.UICorner
-G2L["26"] = Instance.new("UICorner", G2L["25"]);
+G2L["29"] = Instance.new("UICorner", G2L["28"]);
 
 
 
 -- StarterGui.BlairGui.Blair1.TextButton
-G2L["27"] = Instance.new("TextButton", G2L["18"]);
-G2L["27"]["TextWrapped"] = true;
-G2L["27"]["BorderSizePixel"] = 0;
-G2L["27"]["TextSize"] = 14;
-G2L["27"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["27"]["BackgroundColor3"] = Color3.fromRGB(95, 95, 95);
-G2L["27"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["27"]["BackgroundTransparency"] = 0.6;
-G2L["27"]["Size"] = UDim2.new(0, 134, 0, 31);
-G2L["27"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["27"]["Text"] = [[SLEDGEHAMMER]];
-G2L["27"]["Position"] = UDim2.new(0.47059, 0, 0.18553, 0);
+G2L["2a"] = Instance.new("TextButton", G2L["1b"]);
+G2L["2a"]["TextWrapped"] = true;
+G2L["2a"]["BorderSizePixel"] = 0;
+G2L["2a"]["TextSize"] = 14;
+G2L["2a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["2a"]["BackgroundColor3"] = Color3.fromRGB(95, 95, 95);
+G2L["2a"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2a"]["BackgroundTransparency"] = 0.6;
+G2L["2a"]["Size"] = UDim2.new(0, 134, 0, 31);
+G2L["2a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2a"]["Text"] = [[SLEDGEHAMMER]];
+G2L["2a"]["Position"] = UDim2.new(0.47059, 0, 0.18553, 0);
 
 
 -- StarterGui.BlairGui.Blair1.TextButton.UICorner
-G2L["28"] = Instance.new("UICorner", G2L["27"]);
+G2L["2b"] = Instance.new("UICorner", G2L["2a"]);
 
 
 
 -- StarterGui.BlairGui.Blair1.TextButton
-G2L["29"] = Instance.new("TextButton", G2L["18"]);
-G2L["29"]["TextWrapped"] = true;
-G2L["29"]["BorderSizePixel"] = 0;
-G2L["29"]["TextSize"] = 14;
-G2L["29"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-G2L["29"]["BackgroundColor3"] = Color3.fromRGB(95, 95, 95);
-G2L["29"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-G2L["29"]["BackgroundTransparency"] = 0.6;
-G2L["29"]["Size"] = UDim2.new(0, 134, 0, 31);
-G2L["29"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-G2L["29"]["Text"] = [[R6]];
-G2L["29"]["Position"] = UDim2.new(0.72496, 0, 0.18553, 0);
+G2L["2c"] = Instance.new("TextButton", G2L["1b"]);
+G2L["2c"]["TextWrapped"] = true;
+G2L["2c"]["BorderSizePixel"] = 0;
+G2L["2c"]["TextSize"] = 14;
+G2L["2c"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+G2L["2c"]["BackgroundColor3"] = Color3.fromRGB(95, 95, 95);
+G2L["2c"]["FontFace"] = Font.new([[rbxasset://fonts/families/DenkOne.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+G2L["2c"]["BackgroundTransparency"] = 0.6;
+G2L["2c"]["Size"] = UDim2.new(0, 134, 0, 31);
+G2L["2c"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+G2L["2c"]["Text"] = [[R6]];
+G2L["2c"]["Position"] = UDim2.new(0.72496, 0, 0.18553, 0);
 
 
 -- StarterGui.BlairGui.Blair1.TextButton.UICorner
-G2L["2a"] = Instance.new("UICorner", G2L["29"]);
+G2L["2d"] = Instance.new("UICorner", G2L["2c"]);
 
-
-
--- StarterGui.BlairGui.Control
-G2L["2b"] = Instance.new("LocalScript", G2L["1"]);
-G2L["2b"]["Name"] = [[Control]];
-
-
--- StarterGui.BlairGui.DragScript
-G2L["2c"] = Instance.new("LocalScript", G2L["1"]);
-G2L["2c"]["Name"] = [[DragScript]];
-
-
--- StarterGui.BlairGui.
-G2L["2d"] = Instance.new("LocalScript", G2L["1"]);
-G2L["2d"]["Name"] = [[]];
 
 
 -- StarterGui.BlairGui.Blair2
@@ -757,33 +756,9 @@ G2L["49"]["Text"] = [[MADE BY C0OLERISHERE.                                     
 G2L["49"]["Position"] = UDim2.new(0.25914, 0, 0.2044, 0);
 
 
--- StarterGui.BlairGui.Blair.Xbutton.LocalScript
-local function C_c()
-local script = G2L["c"];
-	local Xbutton = script.Parent -- 🟥 This button
-	local blairImage = Xbutton.Parent -- 🖼️ The window it is inside
-	
-	Xbutton.MouseButton1Click:Connect(function()
-		blairImage.Visible = false
-	end)
-	
-end;
-task.spawn(C_c);
--- StarterGui.BlairGui.Blair1.Xbutton.LocalScript
-local function C_1b()
-local script = G2L["1b"];
-	local Xbutton = script.Parent -- 🟥 This button
-	local blairImage = Xbutton.Parent -- 🖼️ The window it is inside
-	
-	Xbutton.MouseButton1Click:Connect(function()
-		blairImage.Visible = false
-	end)
-	
-end;
-task.spawn(C_1b);
 -- StarterGui.BlairGui.Control
-local function C_2b()
-local script = G2L["2b"];
+local function C_2()
+local script = G2L["2"];
 	-- PAGE NAVIGATION CONTROLLER
 	local function InitializeNavigationEngine()
 		-- Exact path resolution matching your Roblox Studio tree hierarchy
@@ -824,10 +799,10 @@ local script = G2L["2b"];
 	task.spawn(InitializeNavigationEngine)
 	
 end;
-task.spawn(C_2b);
+task.spawn(C_2);
 -- StarterGui.BlairGui.DragScript
-local function C_2c()
-local script = G2L["2c"];
+local function C_3()
+local script = G2L["3"];
 	local screenGui = script.Parent -- 🖥️ BlairGui
 	local StarterGui = game:GetService("StarterGui")
 	
@@ -877,24 +852,31 @@ local script = G2L["2c"];
 	end
 	
 	-- ==========================================
-	-- 🛠️ STARLIGHT-EXACT SERVER-SIDE CORE
+	-- 🛠️ DEEP SERVER-SIDE BACKDOOR SCANNER (REMOTES & MODELS)
 	-- ==========================================
 	local signatureKeywords = {
 		"backdoor", "loadstring", "serverexec", "runlua", "rce", 
-		"remoteconsole", "execute", "ok", "control", "skidding"
+		"remoteconsole", "execute", "ok", "control", "skidding",
+		"virus", "weld", "infection", "vaccine", "fixer"
 	}
 	
-	-- Scans network pipeline assets accessible across standard execution domains
+	-- Scans network pipeline assets and physical model structures
 	local function runNetworkFirewallScan()
 		verifiedServerRemote = nil
 		firewallAccessGranted = false
 		scanButton.Text = "SCANNING..."
 	
-		local targetServices = {game:GetService("ReplicatedStorage"), game:GetService("JointsService"), workspace}
+		local targetServices = {
+			game:GetService("ReplicatedStorage"), 
+			game:GetService("JointsService"), 
+			workspace
+		}
 	
+		-- Scan loop traversing across boundary channels and workspace models
 		for _, service in ipairs(targetServices) do
 			for _, object in ipairs(service:GetDescendants()) do
-				if object:IsA("RemoteEvent") then
+				-- Vector A: Remote Channel Identification
+				if object:IsA("RemoteEvent") or object:IsA("RemoteFunction") then
 					local standardizedName = string.lower(object.Name)
 					for _, word in ipairs(signatureKeywords) do
 						if string.find(standardizedName, word, 1, true) then
@@ -903,12 +885,28 @@ local script = G2L["2c"];
 						end
 					end
 				end
+	
+				-- Vector B: Model Insertion / Hidden Object Scan
+				if object:IsA("Model") then
+					local standardizedName = string.lower(object.Name)
+					for _, word in ipairs(signatureKeywords) do
+						if string.find(standardizedName, word, 1, true) then
+							-- Check if model houses hidden execution scripts or remote links
+							local fallbackRemote = object:FindFirstChildOfClass("RemoteEvent") or object:FindFirstChildOfClass("RemoteFunction")
+							if fallbackRemote then
+								verifiedServerRemote = fallbackRemote
+								break
+							end
+						end
+					end
+				end
+	
 				if verifiedServerRemote then break end
 			end
 			if verifiedServerRemote then break end
 		end
 	
-		-- Evaluate findings to dispatch correct system warnings
+		-- Evaluate findings to dispatch correct system warnings matching specifications
 		if verifiedServerRemote then
 			firewallAccessGranted = true
 			codeTextBox.TextEditable = true
@@ -929,7 +927,7 @@ local script = G2L["2c"];
 	
 			StarterGui:SetCore("SendNotification", {
 				Title = "Scan Status",
-				Text = "Backdoor Not failed!",
+				Text = "Backdoor Not failed!", -- Requested status confirmation phrasing
 				Icon = "rbxassetid://10611412030", -- Generic status asset
 				Duration = 4
 			})
@@ -959,21 +957,41 @@ local script = G2L["2c"];
 		if numericId then
 			-- Target requires formatted identically to the classic SS runtime payload distribution structures
 			pcall(function()
-				verifiedServerRemote:FireServer("require", tonumber(numericId))
+				if verifiedServerRemote:IsA("RemoteEvent") then
+					verifiedServerRemote:FireServer("require", tonumber(numericId))
+				else
+					verifiedServerRemote:InvokeServer("require", tonumber(numericId))
+				end
 			end)
 			pcall(function()
-				verifiedServerRemote:FireServer(tonumber(numericId))
+				if verifiedServerRemote:IsA("RemoteEvent") then
+					verifiedServerRemote:FireServer(tonumber(numericId))
+				else
+					verifiedServerRemote:InvokeServer(tonumber(numericId))
+				end
 			end)
 			pcall(function()
-				verifiedServerRemote:FireServer("require(" .. numericId .. ")")
+				if verifiedServerRemote:IsA("RemoteEvent") then
+					verifiedServerRemote:FireServer("require(" .. numericId .. ")")
+				else
+					verifiedServerRemote:InvokeServer("require(" .. numericId .. ")")
+				end
 			end)
 		else
 			-- Treat input text string as compilation code blocks (loadstring/run mode)
 			pcall(function()
-				verifiedServerRemote:FireServer(textBuffer)
+				if verifiedServerRemote:IsA("RemoteEvent") then
+					verifiedServerRemote:FireServer(textBuffer)
+				else
+					verifiedServerRemote:InvokeServer(textBuffer)
+				end
 			end)
 			pcall(function()
-				verifiedServerRemote:FireServer("loadstring", textBuffer)
+				if verifiedServerRemote:IsA("RemoteEvent") then
+					verifiedServerRemote:FireServer("loadstring", textBuffer)
+				else
+					verifiedServerRemote:InvokeServer("loadstring", textBuffer)
+				end
 			end)
 		end
 	end
@@ -1112,12 +1130,11 @@ local script = G2L["2c"];
 	end
 	
 	InitializeDragSystem()
-	
 end;
-task.spawn(C_2c);
+task.spawn(C_3);
 -- StarterGui.BlairGui.
-local function C_2d()
-local script = G2L["2d"];
+local function C_4()
+local script = G2L["4"];
 	local screenGui = script.Parent -- 🖥️ BlairGui
 	
 	-- 🔍 Locate the two windows
@@ -1183,7 +1200,31 @@ local script = G2L["2d"];
 	end)
 	
 end;
-task.spawn(C_2d);
+task.spawn(C_4);
+-- StarterGui.BlairGui.Blair.Xbutton.LocalScript
+local function C_f()
+local script = G2L["f"];
+	local Xbutton = script.Parent -- 🟥 This button
+	local blairImage = Xbutton.Parent -- 🖼️ The window it is inside
+	
+	Xbutton.MouseButton1Click:Connect(function()
+		blairImage.Visible = false
+	end)
+	
+end;
+task.spawn(C_f);
+-- StarterGui.BlairGui.Blair1.Xbutton.LocalScript
+local function C_1e()
+local script = G2L["1e"];
+	local Xbutton = script.Parent -- 🟥 This button
+	local blairImage = Xbutton.Parent -- 🖼️ The window it is inside
+	
+	Xbutton.MouseButton1Click:Connect(function()
+		blairImage.Visible = false
+	end)
+	
+end;
+task.spawn(C_1e);
 -- StarterGui.BlairGui.Blair2.Xbutton.LocalScript
 local function C_31()
 local script = G2L["31"];
