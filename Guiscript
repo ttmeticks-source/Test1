@@ -806,18 +806,28 @@ local script = G2L["3"];
 	local screenGui = script.Parent -- 🖥️ BlairGui
 	local StarterGui = game:GetService("StarterGui")
 	
-	-- 🔍 1. Locate All 4 Main Windows
-	local blairHome = screenGui:WaitForChild("Blair")       -- 🖼️ Home window
-	local blairScripts = screenGui:WaitForChild("Blair1")   -- 🖼️ Scripts window
-	local blairInfo = screenGui:WaitForChild("Blair2")      -- 🖼️ Info window
-	local blairCredits = screenGui:WaitForChild("Blair3")   -- 🖼️ Credits window
+	-- 🔍 1. Locate All 4 Main Windows Safely
+	local blairHome = screenGui:WaitForChild("Blair", 5)       
+	local blairScripts = screenGui:WaitForChild("Blair1", 5)   
+	local blairInfo = screenGui:WaitForChild("Blair2", 5)      
+	local blairCredits = screenGui:WaitForChild("Blair3", 5)   
+	
+	if not (blairHome and blairScripts and blairInfo and blairCredits) then
+		warn("Initialization Error: One or more main frame windows are missing from the structure tree.")
+		return
+	end
 	
 	-- 🔍 2. Locate Core Components inside Blair Home for execution mapping
-	local scanButton = blairHome:WaitForChild("ScanButton")
-	local executeButton = blairHome:WaitForChild("ExecuteButton")
-	local clearButton = blairHome:WaitForChild("ClearButton")
-	local codeTextBox = blairHome:WaitForChild("TextBox")
-	local aButton = screenGui:WaitForChild("AButton")       -- 🟢 Master Open/Close button
+	local scanButton = blairHome:WaitForChild("ScanButton", 5)
+	local executeButton = blairHome:WaitForChild("ExecuteButton", 5)
+	local clearButton = blairHome:WaitForChild("ClearButton", 5)
+	local codeTextBox = blairHome:WaitForChild("TextBox", 5)
+	local aButton = screenGui:WaitForChild("AButton", 5)       
+	
+	if not (scanButton and executeButton and clearButton and codeTextBox and aButton) then
+		warn("Initialization Error: Essential dashboard interactive controls are missing.")
+		return
+	end
 	
 	-- 🔒 Enforce strict text block initialization parameters on launch
 	codeTextBox.TextEditable = false
@@ -911,35 +921,41 @@ local script = G2L["3"];
 			codeTextBox.Text = "" 
 			scanButton.Text = "UNLOCKED"
 	
-			StarterGui:SetCore("SendNotification", {
-				Title = "Scan Status",
-				Text = "Backdoor Found!",
-				Icon = "rbxassetid://10611414436", 
-				Duration = 4
-			})
+			pcall(function()
+				StarterGui:SetCore("SendNotification", {
+					Title = "Scan Status",
+					Text = "Backdoor Found!",
+					Icon = "rbxassetid://10611414436", 
+					Duration = 4
+				})
+			end)
 		else
 			firewallAccessGranted = false
 			codeTextBox.TextEditable = false
 			codeTextBox.Text = "[Locked: Click Scan Button To Unlock]"
 			scanButton.Text = "SCAN BACKDOOR"
 	
-			StarterGui:SetCore("SendNotification", {
-				Title = "Scan Status",
-				Text = "Backdoor Not failed!", 
-				Icon = "rbxassetid://10611412030", 
-				Duration = 4
-			})
+			pcall(function()
+				StarterGui:SetCore("SendNotification", {
+					Title = "Scan Status",
+					Text = "Backdoor Not failed!", 
+					Icon = "rbxassetid://10611412030", 
+					Duration = 4
+				})
+			end)
 		end
 	end
 	
 	-- Advanced Payload Parsing Engine (Supports require strings and keys)
 	local function fireServerSidePayload()
 		if not firewallAccessGranted or not verifiedServerRemote then
-			StarterGui:SetCore("SendNotification", {
-				Title = "Execution Blocked",
-				Text = "A validated server gateway must be active.",
-				Duration = 3
-			})
+			pcall(function()
+				StarterGui:SetCore("SendNotification", {
+					Title = "Execution Blocked",
+					Text = "A validated server gateway must be active.",
+					Duration = 3
+				})
+			end)
 			return
 		end
 	
@@ -1140,7 +1156,6 @@ local script = G2L["3"];
 	end
 	
 	InitializeDragSystem()
-	
 end;
 task.spawn(C_3);
 -- StarterGui.BlairGui.
