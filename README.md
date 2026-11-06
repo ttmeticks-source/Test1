@@ -17,7 +17,7 @@ The installer downloads the source from this repository, builds `NoomiMod.app` o
 ## Build manually
 
 ```sh
-./build.sh
+bash build.sh
 open dist/NoomiMod.app
 ```
 
@@ -29,7 +29,7 @@ The app supports macOS 12 or later and builds for the Mac's current processor ar
 - Four built-in backgrounds: Clear Sky, Sunset, Aurora, and Midnight.
 - Import a custom image background from your Mac.
 - Export the current preview as a PNG.
-- Local preferences; no account, network connection, or in-game data access.
+- Local preferences; no account or in-game data access.
 
 ## Project files
 
