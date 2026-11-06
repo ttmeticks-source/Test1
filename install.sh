@@ -11,6 +11,10 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
   echo "NoomiMod's .app installer runs on macOS only." >&2
   exit 1
 fi
+if ! command -v swiftc >/dev/null 2>&1; then
+  echo "Swift compiler not found. Install Apple's standalone Command Line Tools (not the full Xcode app), then run this installer again." >&2
+  exit 1
+fi
 
 ARCHIVE_URL="https://github.com/${REPO}/archive/refs/heads/${BRANCH}.tar.gz"
 echo "Downloading NoomiMod source from GitHub…"
@@ -18,7 +22,7 @@ curl --fail --location --silent --show-error --retry 3 "$ARCHIVE_URL" -o "$TMP_D
 tar -xzf "$TMP_DIR/noomimod.tar.gz" -C "$TMP_DIR"
 PROJECT_DIR="$TMP_DIR/Test1-${BRANCH}"
 
-"$PROJECT_DIR/build.sh"
+bash "$PROJECT_DIR/build.sh"
 APP_SOURCE="$PROJECT_DIR/dist/NoomiMod.app"
 
 if [[ -w "/Applications" ]]; then
