@@ -80,30 +80,37 @@ if [[ ! -x "$PYTHON" ]]; then
   exit 1
 fi
 
-# Download Tor Expert Bundle directly from the Tor Project and verify its digest.
-TOR_ARCHIVE="tor-expert-bundle-macos-${TOR_ARCH}-${TOR_VERSION}.tar.gz"
-TOR_URL="https://dist.torproject.org/torbrowser/${TOR_VERSION}/${TOR_ARCHIVE}"
-TOR_TARBALL="$TMP_DIR/$TOR_ARCHIVE"
-echo "Downloading Tor Expert Bundle for ${ARCH}..."
-curl -fL --retry 3 --retry-delay 2 "$TOR_URL" -o "$TOR_TARBALL"
-ACTUAL_TOR_SHA256="$(/usr/bin/shasum -a 256 "$TOR_TARBALL" | /usr/bin/awk '{print $1}')"
-if [[ "$ACTUAL_TOR_SHA256" != "$TOR_SHA256" ]]; then
-  echo "ERROR: Tor bundle SHA-256 verification failed."
-  echo "Expected: $TOR_SHA256"
-  echo "Received: $ACTUAL_TOR_SHA256"
-  exit 1
-fi
-
-echo "Tor checksum verified; extracting..."
-rm -rf "$TOR_HOME"
-mkdir -p "$TOR_HOME"
-/usr/bin/tar -xzf "$TOR_TARBALL" -C "$TOR_HOME"
-# The macOS Expert Bundle extracts into a top-level tor/ directory.
-# Do not filter by archived execute permissions.
+# Reuse the Tor bundle already extracted by a previous run, if present.
+# Otherwise download the official Expert Bundle and verify its SHA-256 digest.
 TOR_BIN="$TOR_HOME/tor/tor"
 if [[ ! -f "$TOR_BIN" ]]; then
   TOR_BIN="$TOR_HOME/tor/tor.real"
 fi
+
+if [[ ! -f "$TOR_BIN" ]]; then
+  TOR_ARCHIVE="tor-expert-bundle-macos-$TOR_ARCH-$TOR_VERSION.tar.gz"
+  TOR_URL="https://dist.torproject.org/torbrowser/$TOR_VERSION/$TOR_ARCHIVE"
+  TOR_TARBALL="$TMP_DIR/$TOR_ARCHIVE"
+  echo "Downloading Tor Expert Bundle for $ARCH..."
+  curl -fL --retry 3 --retry-delay 2 "$TOR_URL" -o "$TOR_TARBALL"
+  ACTUAL_TOR_SHA256="$(/usr/bin/shasum -a 256 "$TOR_TARBALL" | /usr/bin/awk '{print $1}')"
+  if [[ "$ACTUAL_TOR_SHA256" != "$TOR_SHA256" ]]; then
+    echo "ERROR: Tor bundle SHA-256 verification failed."
+    echo "Expected: $TOR_SHA256"
+    echo "Received: $ACTUAL_TOR_SHA256"
+    exit 1
+  fi
+
+  echo "Tor checksum verified; extracting..."
+  rm -rf "$TOR_HOME"
+  mkdir -p "$TOR_HOME"
+  /usr/bin/tar -xzf "$TOR_TARBALL" -C "$TOR_HOME"
+  TOR_BIN="$TOR_HOME/tor/tor"
+  if [[ ! -f "$TOR_BIN" ]]; then
+    TOR_BIN="$TOR_HOME/tor/tor.real"
+  fi
+fi
+
 if [[ ! -f "$TOR_BIN" ]]; then
   TOR_BIN="$(/usr/bin/find -L "$TOR_HOME" -type f -name tor -print -quit)"
 fi
