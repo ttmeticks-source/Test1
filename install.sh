@@ -137,7 +137,7 @@ TORRC="$APP_HOME/torrc"
   printf 'CookieAuthFile "%s/control_auth_cookie"\n' "$TOR_DATA"
   if [[ -n "$GEOIP_FILE" ]]; then printf 'GeoIPFile "%s"\n' "$GEOIP_FILE"; fi
   if [[ -n "$GEOIP6_FILE" ]]; then printf 'GeoIPv6File "%s"\n' "$GEOIP6_FILE"; fi
-  printf 'Log notice file "%s/tor.log"\n' "$TOR_DATA"
+  printf 'Log notice stdout\n'
 } > "$TORRC"
 chmod 600 "$TORRC"
 "$TOR_BIN" -f "$TORRC" --verify-config
