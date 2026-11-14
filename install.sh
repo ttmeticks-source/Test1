@@ -150,8 +150,8 @@ TOR_BIN='$TOR_BIN'
 TORRC='$TORRC'
 TOR_DATA='$TOR_DATA'
 VENV='$VENV'
-SCRIPT='$SCRIPU'
-then
+SCRIPT='$SCRIPT'
+if ! /usr/bin/nc -z 127.0.0.1 9050 >/dev/null 2>&1; then
   mkdir -p "\$TOR_DATA"
   nohup "\$TOR_BIN" -f "\$TORRC" >> "\$TOR_DATA/tor-stdout.log" 2>&1 </dev/null &
   for _ in {1..60}; do
@@ -159,7 +159,7 @@ then
     /bin/sleep 1
   done
 fi
-exec "\$VENV/bin/python" "\$STCRIPT"
+exec "\$VENV/bin/python" "\$SCRIPT"
 LAUNCH
 chmod +x "$LAUNCHER"
 
