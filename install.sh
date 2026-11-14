@@ -105,7 +105,7 @@ if [[ ! -f "$TOR_BIN" ]]; then
   TOR_BIN="$TOR_HOME/tor/tor.real"
 fi
 if [[ ! -f "$TOR_BIN" ]]; then
-  TOR_BIN="$(/usr/bin/find -L "$TOR_HOME" -type f \\( -name tor -o -name tor.real \\) -print -quit)"
+  TOR_BIN="$(/usr/bin/find -L "$TOR_HOME" -type f -name tor -print -quit)"
 fi
 if [[ -z "$TOR_BIN" || ! -f "$TOR_BIN" ]]; then
   echo "ERROR: Tor executable was not found. Extracted bundle contents:"
