@@ -98,9 +98,24 @@ echo "Tor checksum verified; extracting..."
 rm -rf "$TOR_HOME"
 mkdir -p "$TOR_HOME"
 /usr/bin/tar -xzf "$TOR_TARBALL" -C "$TOR_HOME"
-TOR_BIN="$(/usr/bin/find -L "$TOR_HOME" -type f -name tor -perm -111 -print -quit)"
-if [[ -z "$TOR_BIN" || ! -x "$TOR_BIN" ]]; then
-  echo "ERROR: Could not find the Tor executable in the downloaded bundle."
+# The macOS Expert Bundle extracts into a top-level tor/ directory.
+# Do not filter by archived execute permissions.
+TOR_BIN="$TOR_HOME/tor/tor"
+if [[ ! -f "$TOR_BIN" ]]; then
+  TOR_BIN="$TOR_HOME/tor/tor.real"
+fi
+if [[ ! -f "$TOR_BIN" ]]; then
+  TOR_BIN="$(/usr/bin/find -L "$TOR_HOME" -type f \\( -name tor -o -name tor.real \\) -print -quit)"
+fi
+if [[ -z "$TOR_BIN" || ! -f "$TOR_BIN" ]]; then
+  echo "ERROR: Tor executable was not found. Extracted bundle contents:"
+  /usr/bin/find "$TOR_HOME" -maxdepth 3 -print | /usr/bin/head -80
+  exit 1
+fi
+chmod +x "$TOR_BIN"
+if ! "$TOR_BIN" --version >/dev/null 2>&1; then
+  echo "ERROR: The extracted Tor binary could not run on this Mac."
+  "$TOR_BIN" --version 2>&1 || true
   exit 1
 fi
 GEOIP_FILE="$(/usr/bin/find -L "$TOR_HOME" -type f -name geoip -print -quit)"
